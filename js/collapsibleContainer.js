@@ -1,6 +1,16 @@
-function createButton(text) {
+/**
+ * Creates a button and adds to other Elements with appendChild()
+ * @param {string} text adds Button innerText
+ * @param {string} faIcon adds every time fa- before class-ICONNAME (Example: fa-square: =- square)
+ */
+function createButton(text, faIcon) {
     let addCardsButton = document.createElement("button");
-    addCardsButton.innerHTML = text;
+    let buttonIcon = document.createElement("i");
+        buttonIcon.style.marginRight = "8px";
+        buttonIcon.style.transition = "transform .8s;";
+        buttonIcon.style.transform = "skew(-0.08turn)";
+        buttonIcon.className = "fas fa-" + faIcon;
+    addCardsButton.innerHTML = buttonIcon.outerHTML + text;
     addCardsButton.style.color = "#FFF";
     addCardsButton.style.margin = "5px 0px";
     return addCardsButton;
@@ -68,7 +78,7 @@ class CollapsibleContainer extends Widget {
         let orgHeightVal = this.content.style.height;
         this.collapsed = false;
 
-        let collapseButton = createButton("Toggle container");
+        let collapseButton = createButton("Toggle container", "arrows-alt-v");
         collapseButton.addEventListener('click', () => {
             this.collapsed = !this.collapsed;
 

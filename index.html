@@ -5,12 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cards Widget</title>
+    <title>gridCards Widget</title>
+    <!-- adds own icon and font-family-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <style>
+        :root {
+            /* global variables */
+            /* set own icon font-family Group */
+            --card-font-family: 'Montserrat', sans-serif;
+            --card-rgba-prim-color: rgba(53,53,53,0.7);
+            --card-rgba-sec-color: rgba(53, 53, 53, 00.7);
+            --card-buttons-color: #3aa1cf;
+  
+        }
         body {
-           
-            font-family: 'Montserrat', sans-serif;
+            
+            font-family: var(--card-font-family);
             font-weight: 500;
             letter-spacing: -1px;
             font-size: 26px;
@@ -18,12 +29,12 @@
         }
 
         button {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 20px;
+            font-family: var(--card-font-family);
+            font-size: 16px;
             font-weight: 600;
             letter-spacing: -1px;
-            text-shadow: 2px -2px rgba(53,53,53,0.7);
-            background-color: #3aa1cf !important;
+            text-shadow: 2px -2px var(--card-rgba-prim-color);
+            background-color: var(--card-buttons-color) !important;
             transform: skewX(0.055turn);
             left: 1px;
             position: relative;
@@ -34,8 +45,8 @@
         }
 
         button:hover, button:focus {
-            text-shadow: 4px -5px rgba(53,53,53,0.7);
-            background-color: rgba(53, 53, 53, 00.7) !important;
+            text-shadow: 4px -5px var(--card-rgba-prim-color);
+            background-color: var(--card-rgba-sec-color) !important;
             color: #FFF !important; 
             cursor:pointer; 
         }
@@ -122,7 +133,7 @@
             }
 
             let collapsibleContainer = new CollapsibleContainer("Header", {
-                title: "gridCards",
+                title: "<i style='color:#0099CC;transform:skewX(-0.03turn);' class='fas fa-th'></i> gridCards",
                 content: cardStack.domElement
             });
         }
@@ -149,7 +160,7 @@
             }
 
 
-            function addCard() {
+            function addCards() {
                 for (let i = 0; i < 6; i++) {
                     let c = new Card({
                         front: "Front",
@@ -162,6 +173,16 @@
                 }
             }
 
+            function addCard() {
+                let c = new Card({
+                    front: "Front",
+                    back: "Back",
+                    itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth +
+                        "/" +
+                        226 + "/?random&bla=" + (Math.random()) + "no-repeat')",
+                });
+                cardStack2.addCard(c);
+            }
 
             let node = cardStack2.domElement;
 
@@ -182,17 +203,22 @@
                 node.removeChild(node.childNodes[0]);
             }
 
-            let addCardsButton = this.createButton("Add cards");
-            addCardsButton.addEventListener('click', (e) => {
+            let addCardButton = this.createButton("Add card", "plus-square");
+            addCardButton.addEventListener('click', (e) => {
                 addCard();
             });
 
-            let removeCardButton = this.createButton("Remove one card");
+            let addCardsButton = this.createButton("Add cards", "th");
+            addCardsButton.addEventListener('click', (e) => {
+                addCards();
+            });
+
+            let removeCardButton = this.createButton("Remove card", "minus-square");
             removeCardButton.addEventListener('click', (e) => {
                 removeCard();
             });
 
-            let removeCardsButton = this.createButton("Remove all cards");
+            let removeCardsButton = this.createButton("Remove cards", "trash-alt");
             removeCardsButton.addEventListener('click', (e) => {
                 removeCards();
             });
@@ -201,9 +227,10 @@
 
             let addButtonsDiv = document.createElement("div");
             addButtonsDiv.style.display = "inline-grid";
-            addButtonsDiv.style.gridTemplateColumns = "repeat(3, 1fr)";
+            addButtonsDiv.style.gridTemplateColumns = "repeat(4, 1fr)";
             addButtonsDiv.style.gridGap = "0 7px";
 
+            addButtonsDiv.appendChild(addCardButton);
             addButtonsDiv.appendChild(addCardsButton);
             addButtonsDiv.appendChild(removeCardButton);
             addButtonsDiv.appendChild(removeCardsButton);
