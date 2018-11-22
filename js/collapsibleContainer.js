@@ -18,11 +18,24 @@ class CollapsibleContainer extends Widget {
         let headerContainer = document.createElement("section");
         headerContainer.style.display = "grid";
         headerContainer.style.height = "64px";
+        headerContainer.style.gridArea = "header";
         headerContainer.style.lineHeight = "64px";
         headerContainer.style.gridGap = "4px 6px";
         headerContainer.style.gridTemplateColumns = "2fr 1fr";
-
+        
         this.domElement.appendChild(headerContainer);
+
+
+        document.getElementsByTagName('body')[0].onscroll = function() {
+            if (window.scrollY < 222) {
+                headerContainer.style.position = "sticky";
+                headerContainer.style.top = "0";
+                headerContainer.style.zIndex = "999";
+            }
+        };
+
+        
+        headerContainer.style.gridGap = "4px 6px";
 
         if (typeof this.title === "string") {
             let titleElement = document.createElement("div");
@@ -45,7 +58,7 @@ class CollapsibleContainer extends Widget {
         let orgHeightVal = this.content.style.height;
         this.collapsed = false;
 
-        let collapseButton = createButton("Toggle Container");
+        let collapseButton = createButton("Toggle container");
         collapseButton.addEventListener('click', () => {
             this.collapsed = !this.collapsed;
 
@@ -61,6 +74,5 @@ class CollapsibleContainer extends Widget {
 
         collapseButton.classList.add("collapseButton");
         headerContainer.appendChild(collapseButton);
-
     }
 }

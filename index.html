@@ -19,9 +19,11 @@
 
         button {
             font-family: 'Montserrat', sans-serif;
-            font-size: 22px;
-            letter-spacing: -2px;
-            background-color: rgba(0, 153, 204, 0.5) !important;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -1px;
+            text-shadow: 2px -2px rgba(53,53,53,0.7);
+            background-color: #3aa1cf !important;
             transform: skewX(0.055turn);
             left: 1px;
             position: relative;
@@ -32,6 +34,7 @@
         }
 
         button:hover, button:focus {
+            text-shadow: 4px -5px rgba(53,53,53,0.7);
             background-color: rgba(53, 53, 53, 00.7) !important;
             color: #FFF !important; 
             cursor:pointer; 
@@ -50,6 +53,33 @@
         @keyframes animatefromMiddle {
             from { transform: scale(0); }
             to   { transform: scale(1); }
+        }
+
+        @media (min-width: 500px) {
+            #Header > .innerDialog {
+                grid-template-columns: 1fr 3fr;
+                grid-template-areas: +
+                "header header"
+                "header header"
+                "content content"
+                "header header"
+                "content content"
+                "footer footer"; 
+            }
+        }
+
+        @media (min-width: 700px) {
+            #Header > .innerDialog {
+                grid-template-columns: 1fr 4fr 1fr;
+                grid-template-areas: 
+                "header header header"
+                "header header header"
+                "content content content"
+                "header header header"
+                "content content content"
+                "footer footer footer"; 
+            }
+        }
 }
     </style>
 </head>
@@ -80,7 +110,7 @@
             cardStack.addCard(card1);
 
             //Mockuploop
-            for (let i = 0; i < 4; i++) {
+            for (let i = 0; i < 2; i++) {
                 let c = new Card({
                     front: "Front",
                     back: "Back",
@@ -91,15 +121,8 @@
                 cardStack.addCard(c);
             }
 
-            /*let card3 = new Card({
-                front: "Front",
-                back: "Back"
-            });
-            cardStack.addCard(card3);*/
-
-
             let collapsibleContainer = new CollapsibleContainer("Header", {
-                title: "More dynamics with Javascript Classes",
+                title: "gridCards",
                 content: cardStack.domElement
             });
         }
@@ -152,33 +175,46 @@
                 }
             }
 
+            function removeCard() {
+                if (node === undefined || node === null) {
+                    return;
+                }
+                let len = node.childNodes.length;
+                while (node.firstChild) {
+                    node.removeChild(node.firstChild);
+                }
+            }
+
             let addCardsButton = this.createButton("Add cards");
             addCardsButton.addEventListener('click', (e) => {
                 addCard();
             });
 
-            let removeCardsButton = this.createButton("Remove all upper cards");
+            let removeCardButton = this.createButton("Remove one card");
+            removeCardButton.addEventListener('click', (e) => {
+                removeCard();
+            });
+
+            let removeCardsButton = this.createButton("Remove all cards");
             removeCardsButton.addEventListener('click', (e) => {
                 removeCards();
             });
 
-            
+            //grid-area: sidebar; footer
 
             let addButtonsDiv = document.createElement("div");
             addButtonsDiv.style.display = "inline-grid";
-            addButtonsDiv.style.gridTemplateColumns = "repeat(2, 1fr)";
-            addButtonsDiv.style.gridGap = "0 6px";
+            addButtonsDiv.style.gridTemplateColumns = "repeat(3, 1fr)";
+            addButtonsDiv.style.gridGap = "0 7px";
 
             addButtonsDiv.appendChild(addCardsButton);
+            addButtonsDiv.appendChild(removeCardButton);
             addButtonsDiv.appendChild(removeCardsButton);
 
             let collapsibleContainer2 = new CollapsibleContainer("Header", {
                 title: addButtonsDiv,
                 content: cardStack2.domElement
             });
-
-            console.log(cardStack2.domElement);
-
         }
     </script>
 </body>

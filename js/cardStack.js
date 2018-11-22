@@ -5,6 +5,12 @@ class CardStack extends Widget {
         this.domElement.style.transition = "all 0.33s ease";
         this.domElement.style.height = "auto";
         this.domElement.style.display = "grid";
+        this.domElement.style.gridTemplateAreas =
+                                            "header" +
+                                            "content" +
+                                            "sidebar" +
+                                            "footer";
+        this.domElement.style.gridArea = "content";
         this.domElement.style.gridTemplateRows = "repeat(9, 1fr)"; 
         this.domElement.style.gridGap = "6px";
         this.domElement.style.transformOrigin = "top";
