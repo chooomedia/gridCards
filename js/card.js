@@ -51,7 +51,7 @@ class Card extends Widget {
         if (this.isFlipped) {
             return;
         }
-        this.isFlipped = true;   
+        this.isFlipped = true;
         if (this.flippingTimeout) {
             clearTimeout(this.flippingTimeout);
             this.flippingTimeout = null;
@@ -63,10 +63,13 @@ class Card extends Widget {
         if (!this.isFlipped || this.flippingTimeout) {
             return;
         }
-        this.flippingTimeout = setTimeout(() =>
-        { 
+        this.flippingTimeout = setTimeout(() => {
             this.isFlipped = false;
             this.flippingTimeout = null;
+
+            this.domElement.style.transition = "all .5s";
+            this.domElement.style.filter = "blur(0px)";
+            this.domElement.style.transform = "skewX(-0.055turn)";
             this.show();
         }, 500);
     }
@@ -84,7 +87,7 @@ class Card extends Widget {
             this.front.style.display = "block";
             this.back.style.display = "none";
         }
-        
+
         if (this.cardOptions && this.cardOptions.itemBackgr) {
             if (typeof this.cardOptions.itemBackgr === "function") {
                 this.domElement.style.background = this.cardOptions.itemBackgr(this);

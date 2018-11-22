@@ -22,21 +22,30 @@ class CollapsibleContainer extends Widget {
         headerContainer.style.lineHeight = "64px";
         headerContainer.style.gridGap = "4px 6px";
         headerContainer.style.gridTemplateColumns = "2fr 1fr";
-        
+
         this.domElement.appendChild(headerContainer);
 
-
-        document.getElementsByTagName('body')[0].onscroll = function() {
+        // selects the body and calls on-time numeric height
+        document.getElementsByTagName('body')[0].onscroll = function () {
             if (window.scrollY < 222) {
                 headerContainer.style.position = "sticky";
                 headerContainer.style.top = "0";
                 headerContainer.style.zIndex = "999";
             }
+
+            if (window.scrollY > 506) {
+                let gridCardArray = document.getElementsByClassName("gridCardElement");
+                let cardLength = gridCardArray.length;
+                let randomIndex = Math.floor((Math.random() * cardLength -15) + 1);
+                    gridCardArray[randomIndex].style.backgroundAttachment = "fixed";
+                    gridCardArray[randomIndex].style.backgroundSize = "cover";
+                    gridCardArray[randomIndex].style.transition = "all .3s";
+                    gridCardArray[randomIndex].style.filter = "blur(3px)";
+            }
         };
 
-        
         headerContainer.style.gridGap = "4px 6px";
-
+        // Proofs is the Param String or Funct.
         if (typeof this.title === "string") {
             let titleElement = document.createElement("div");
             titleElement.innerHTML = this.title;
@@ -46,6 +55,7 @@ class CollapsibleContainer extends Widget {
             headerContainer.appendChild(this.title);
         }
 
+        // Proofs is the Param String or Funct.
         if (typeof this.content === "string") {
             let contentElement = document.createElement("div");
             contentElement.innerHTML = this.content;
