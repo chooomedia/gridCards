@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cards Widget</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <style>
+        body {
+           
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            letter-spacing: -1px;
+            font-size: 26px;
+            overscroll-behavior: auto;
+        }
+
+        button {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            letter-spacing: -2px;
+            background-color: rgba(0, 153, 204, 0.5) !important;
+            transform: skewX(0.055turn);
+            left: 1px;
+            position: relative;
+            color: #FFF;
+            border: unset;
+            margin:3px 0;
+            transition: all .3s;
+        }
+
+        button:hover, button:focus {
+            background-color: rgba(53, 53, 53, 00.7) !important;
+            color: #FFF !important; 
+            cursor:pointer; 
+        }
+
+        div {
+            font-size: 28px;
+        }
+
+        div.gridCardElement {
+            transform: scale(0);
+            transition: transform 1s;
+            animation: animatefromMiddle .4s 1 cubic-bezier(0.55, 0.085, 0.68, 0.53);
+        }
+
+        @keyframes animatefromMiddle {
+            from { transform: scale(0); }
+            to   { transform: scale(1); }
+}
+    </style>
+</head>
+
+<body>
+    <header id="Header" style="margin:0 14%;"></header>
+
+    <script src="js/widget.js" type="text/javascript"></script>
+    <script src="js/collapsibleContainer.js" type="text/javascript"></script>
+    <script src="js/card.js" type="text/javascript"></script>
+    <script src="js/videoCard.js" type="text/javascript"></script>
+    <script src="js/cardStack.js" type="text/javascript"></script>
+    <script>
+        {
+            let cardStack = new CardStack(null, {
+                //itemBackgr: "url('https://picsum.photos/397/210/?random') no-repeat",
+                itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth + "/" + 226 +
+                    "/?random&bla=" + (Math.random()) + "') no-repeat",
+                columnCount: 3,
+
+            });
+
+
+            let card1 = new VideoCard({
+                itemBackgr: "rgba(0, 153, 204, 0.9)",
+                videoUrl: "https://www.youtube.com/watch?v=ir3EV5wAitI"
+            });
+            cardStack.addCard(card1);
+
+            //Mockuploop
+            for (let i = 0; i < 4; i++) {
+                let c = new Card({
+                    front: "Front",
+                    back: "Back",
+                    itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth +
+                        "/" +
+                        226 + "/?random&bla=" + (Math.random()) + " no-repeat"
+                });
+                cardStack.addCard(c);
+            }
+
+            /*let card3 = new Card({
+                front: "Front",
+                back: "Back"
+            });
+            cardStack.addCard(card3);*/
+
+
+            let collapsibleContainer = new CollapsibleContainer("Header", {
+                title: "More dynamics with Javascript Classes",
+                content: cardStack.domElement
+            });
+        }
+
+        {
+            let cardStack2 = new CardStack(null, {
+                //itemBackgr: "url('https://picsum.photos/397/210/?random') no-repeat",
+                itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth + "/" + 226 +
+                    "/?random&bla=" + (Math.random()) + "') no-repeat",
+                columnCount: 3,
+                itemHeight: "200px"
+            });
+
+            //Mockuploop
+            for (let i = 0; i < 30; i++) {
+                let c = new Card({
+                    front: "Front",
+                    back: "Back",
+                    itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth +
+                        "/" +
+                        226 + "/?random&bla=" + (Math.random()) + " no-repeat"
+                });
+                cardStack2.addCard(c);
+            }
+
+
+            function addCard() {
+                for (let i = 0; i < 6; i++) {
+                    let c = new Card({
+                        front: "Front",
+                        back: "Back",
+                        itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth +
+                            "/" +
+                            226 + "/?random&bla=" + (Math.random()) + " no-repeat"
+                    });
+                    cardStack2.addCard(c);
+                }
+            }
+
+
+            let node = cardStack2.domElement;
+
+            function removeCards() {
+                if (node === undefined || node === null) {
+                    return;
+                }
+                let len = node.childNodes.length;
+                while (node.firstChild) {
+                    node.removeChild(node.firstChild);
+                }
+            }
+
+            let addCardsButton = this.createButton("Add cards");
+            addCardsButton.addEventListener('click', (e) => {
+                addCard();
+            });
+
+            let removeCardsButton = this.createButton("Remove all upper cards");
+            removeCardsButton.addEventListener('click', (e) => {
+                removeCards();
+            });
+
+            
+
+            let addButtonsDiv = document.createElement("div");
+            addButtonsDiv.style.display = "inline-grid";
+            addButtonsDiv.style.gridTemplateColumns = "repeat(2, 1fr)";
+            addButtonsDiv.style.gridGap = "0 6px";
+
+            addButtonsDiv.appendChild(addCardsButton);
+            addButtonsDiv.appendChild(removeCardsButton);
+
+            let collapsibleContainer2 = new CollapsibleContainer("Header", {
+                title: addButtonsDiv,
+                content: cardStack2.domElement
+            });
+
+            console.log(cardStack2.domElement);
+
+        }
+    </script>
+</body>
+
+</html>
