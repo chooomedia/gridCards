@@ -1,7 +1,7 @@
 class Widget {
     constructor(parentContainerId) {
         this.domElement = document.createElement("div");
-
+        
         if (typeof parentContainerId !== "string") {
             return;
         }

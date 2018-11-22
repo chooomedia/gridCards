@@ -209,7 +209,7 @@
             }
 
 
-            // START Creates navbar buttons and append it into variable
+            // START Creates sbutton and append it into variable
             let addCardButton = this.createButton("Add card", "plus-square");
             addCardButton.addEventListener('click', (e) => {
                 addCard();
@@ -229,7 +229,7 @@
             removeCardsButton.addEventListener('click', (e) => {
                 removeCards();
             });
-            // END Creates navbar buttons
+            // END
 
             //TODO: Side-bar-class, Login-Class, Footer-Class+
 
@@ -239,7 +239,7 @@
             addButtonsDiv.style.gridTemplateColumns = "repeat(4, 1fr)";
             addButtonsDiv.style.gridGap = "0 7px";
             
-            // Append all Button Elements to the wrapping parent div
+            // Appends the button to the buttonWrapperDiv
             addButtonsDiv.appendChild(addCardButton);
             addButtonsDiv.appendChild(addCardsButton);
             addButtonsDiv.appendChild(removeCardButton);
