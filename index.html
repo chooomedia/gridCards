@@ -126,11 +126,12 @@
     <script src="js/videoCard.js" type="text/javascript"></script>
     <script src="js/cardStack.js" type="text/javascript"></script>
     <script>
-        {
+         {
             // Creates first card stack from class-function call
             let cardStack = new CardStack(null, {
                 //itemBackgr: "url('https://picsum.photos/397/210/?random') no-repeat",
-                itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth + "/" + 226 +
+                itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth + "/" +
+                    226 +
                     "/?random&bla=" + (Math.random()) + "') no-repeat",
                 columnCount: 3,
 
@@ -143,7 +144,6 @@
             });
             // Adds created card into cardStack
             cardStack.addCard(card1);
-
 
             // Creates a video-card and put it into variable
             let card2 = new VideoCard({
@@ -205,10 +205,10 @@
 
             function addIconsToInput(inputIcon) {
                 let iconBeforeInput = document.createElement("i");
-                    iconBeforeInput.className = "fas fa-" + inputIcon;
-                    iconBeforeInput.style.color = "#FFF";
-                    iconBeforeInput.style.width = "32px";
-                    iconBeforeInput.style.display = "block";
+                iconBeforeInput.className = "fas fa-" + inputIcon;
+                iconBeforeInput.style.color = "#FFF";
+                iconBeforeInput.style.width = "32px";
+                iconBeforeInput.style.display = "block";
                 return iconBeforeInput
             }
 
@@ -233,6 +233,29 @@
             function submit() {
                 console.log('test');
             }
+
+            /*loginFormBox.get("/", function(req, res) {
+                res.redirect("/login");
+            });
+
+            loginFormBox.get("/login", function(req, res) {
+                res.render("index");
+            });
+
+            loginFormBox.post("/", function(req, res) {
+                let userName = req.body.username;
+                let userName = req.body.password;
+                authenticate(req, username, password);
+                if (req.session && req.session.authenticated){
+                    res.render("welcome", { users: data2.user });
+                } else {
+                    res.redirect("/");
+                }
+            });
+
+            loginFormBox.listen(3000, function() {
+                console.log("Started express app!");
+            })*/
 
             function enterToAccount() {
                 let card4 = new Card({
