@@ -6,10 +6,10 @@
 function createButton(text, faIcon) {
     let addCardsButton = document.createElement("button");
     let buttonIcon = document.createElement("i");
-        buttonIcon.style.marginRight = "8px";
-        buttonIcon.style.transition = "transform .8s;";
-        buttonIcon.style.transform = "skew(-0.08turn)";
-        buttonIcon.className = "fas fa-" + faIcon;
+    buttonIcon.style.marginRight = "8px";
+    buttonIcon.style.transition = "transform .8s;";
+    buttonIcon.style.transform = "skew(-0.08turn)";
+    buttonIcon.className = "fas fa-" + faIcon;
     addCardsButton.innerHTML = buttonIcon.outerHTML + text;
     addCardsButton.style.color = "#FFF";
     addCardsButton.style.margin = "5px 0px";
@@ -46,11 +46,11 @@ class CollapsibleContainer extends Widget {
             if (window.scrollY > 506) {
                 let gridCardArray = document.getElementsByClassName("gridCardElement");
                 let cardLength = gridCardArray.length;
-                let randomIndex = Math.floor((Math.random() * cardLength -15) + 1);
-                    gridCardArray[randomIndex].style.backgroundAttachment = "fixed";
-                    gridCardArray[randomIndex].style.backgroundSize = "cover";
-                    gridCardArray[randomIndex].style.transition = "all .3s";
-                    gridCardArray[randomIndex].style.filter = "blur(3px)";
+                let randomIndex = Math.floor((Math.random() * cardLength - 15) + 1);
+                gridCardArray[randomIndex].style.backgroundAttachment = "fixed";
+                gridCardArray[randomIndex].style.backgroundSize = "cover";
+                gridCardArray[randomIndex].style.transition = "all .3s";
+                gridCardArray[randomIndex].style.filter = "blur(3px)";
             }
         };
 
@@ -79,6 +79,7 @@ class CollapsibleContainer extends Widget {
         this.collapsed = false;
 
         let collapseButton = createButton("Toggle container", "arrows-alt-v");
+        collapseButton.style.margin = "5px 0px 5px 1px";
         collapseButton.addEventListener('click', () => {
             this.collapsed = !this.collapsed;
 
