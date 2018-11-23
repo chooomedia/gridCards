@@ -59,8 +59,8 @@ class Card extends Widget {
         let cardIconType = document.createElement("i");
         cardIconType.style.position = "absolute";
         cardIconType.style.color = "#FFF";
-        cardIconType.style.bottom = "0";
-        cardIconType.style.right = "0";
+        cardIconType.style.bottom = "4px";
+        cardIconType.style.right = "4px";
         cardIconType.style.width = "32px";
         cardIconType.style.height = "32px";
         cardIconType.style.transition = "transform .8s;";
@@ -107,10 +107,12 @@ class Card extends Widget {
         if (this.isFlipped) {
             this.domElement.style.transform = "rotateY(-180deg) skewX(0.02turn)";
             this.front.style.display = "none";
-            this.back.style.display = "block";
+            this.back.style.display = "grid";
+            this.back.style.gridRowGap = "4px";
+            this.back.style.transform = "rotateY(-180deg)";
         } else {
             this.domElement.style.transform = "rotateY(0) skewX(-0.02turn)";
-            this.front.style.display = "block";
+            this.front.style.display = "grid";
             this.back.style.display = "none";
         }
 

@@ -31,7 +31,8 @@ class CollapsibleContainer extends Widget {
         headerContainer.style.gridArea = "header";
         headerContainer.style.lineHeight = "64px";
         headerContainer.style.gridGap = "4px 6px";
-        headerContainer.style.gridTemplateColumns = "2fr 1fr";
+        headerContainer.style.gridColumn = "3/3";
+        headerContainer.style.gridTemplateColumns = "5fr 1fr";
 
         this.domElement.appendChild(headerContainer);
 
