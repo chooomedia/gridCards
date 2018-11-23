@@ -69,7 +69,7 @@ class Card extends Widget {
         cardIconType.style.textAlign = "center";
         cardIconType.style.textShadow = "0px 0px 8px rgba(76, 76, 76, 0.7)";
 
-        cardIconType.className = "fab fa-" + iconType;
+        cardIconType.className = "fas fa-" + iconType;
         return cardIconType;
     }
 
