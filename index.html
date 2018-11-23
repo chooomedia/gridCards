@@ -23,7 +23,7 @@
             font-family: var(--card-font-family);
             font-weight: 500;
             letter-spacing: -1px;
-            font-size: 26px;
+            font-size: 24px;
             overscroll-behavior: contain;
         }
 
@@ -51,7 +51,20 @@
         }
 
         div {
-            font-size: 28px;
+            font-size: 22px;
+        }
+
+        div p {
+            line-height: 32.5px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.8);
+            color: rgb(0, 153, 204);
+            position: relative;
+            display: block;
+            padding: 4px;
+            text-align: justify;
+            font-weight: 600;
+            letter-spacing: -2px;
         }
 
         div.gridCardElement {
@@ -112,20 +125,30 @@
                 columnCount: 3,
 
             });
-
             // Creates a video-card and put it into variable
             let card1 = new VideoCard({
-                itemBackgr: "rgba(0, 153, 204, 0.9)",
-                videoUrl: "https://www.youtube.com/watch?v=ir3EV5wAitI&html5=True"
+                itemBackgr: "rgba(0, 153, 204, 0.1)",
+                videoUrl: "https://www.youtube.com/watch?v=ir3EV5wAitI&t=7s",
+                videoHost: "youtube"
             });
             // Adds created card into cardStack
             cardStack.addCard(card1);
 
+            // Creates a video-card and put it into variable
+            let card2 = new VideoCard({
+                itemBackgr: "rgba(0, 153, 204, 0.1)",
+                videoUrl: "https://vimeo.com/213888883",
+                videoHost: "vimeo-v"
+            });
+            // Adds created card into cardStack
+            cardStack.addCard(card2);
+
             // Mockuploop to show empty elements on frontend
-            for (let i = 0; i < 2; i++) {
+            for (let i = 0; i < 1; i++) {
                 let c = new Card({
                     front: "Front",
                     back: "Back",
+                    icon: "cog",
                     itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth +
                         "/" +
                         226 + "/?random&bla=" + (Math.random()) + "no-repeat')"
@@ -153,6 +176,7 @@
                 let c = new Card({
                     front: "Front",
                     back: "Back",
+                    icon: "amazon",
                     itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth +
                         "/" +
                         226 + "/?random&bla=" + (Math.random()) + "no-repeat')"
@@ -166,6 +190,7 @@
                     let c = new Card({
                         front: "Front",
                         back: "Back",
+                        icon: "cog",
                         itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth +
                             "/" +
                             226 + "/?random&bla=" + (Math.random()) + "no-repeat')",
@@ -179,6 +204,7 @@
                 let c = new Card({
                     front: "Front",
                     back: "Back",
+                    icon: "cog",
                     itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth +
                         "/" +
                         226 + "/?random&bla=" + (Math.random()) + "no-repeat')",
@@ -246,7 +272,7 @@
             addButtonsDiv.appendChild(removeCardsButton);
 
             let collapsibleContainer2 = new CollapsibleContainer("Header", {
-            // Put the filled addButtonsDiv(htmlcollection) into a object, u can put objects or strings into the classes
+                // Put the filled addButtonsDiv(htmlcollection) into a object, u can put objects or strings into the classes
                 title: addButtonsDiv,
                 content: cardStack2.domElement
             });

@@ -13,10 +13,18 @@ class Card extends Widget {
     constructor(cardOptions) {
         super(null);
         this.cardOptions = cardOptions;
+        this.iconType = this.cardOptions.iconType;
         if (this.cardOptions) {
             this.front = this.cardOptions.front;
             this.back = this.cardOptions.back;
+            this.icon = this.cardOptions.icon;
         }
+
+        if (typeof this.icon === "string") {
+            let cardIconType = this.setCardTypeIcon(this.icon);
+            this.domElement.appendChild(cardIconType);
+        }
+
         this.domElement.className = "gridCardElement";
         this.domElement.style.width = "100%";
         this.domElement.style.height = "100%";
@@ -26,7 +34,7 @@ class Card extends Widget {
 
 
         if (typeof this.front === "string") {
-            let frontElement = document.createElement("div");
+            let frontElement = document.createElement("p");
             frontElement.innerHTML = this.front;
             this.front = frontElement;
             this.domElement.appendChild(this.front);
@@ -35,7 +43,7 @@ class Card extends Widget {
         }
 
         if (typeof this.back === "string") {
-            let backElement = document.createElement("div");
+            let backElement = document.createElement("p");
             backElement.innerHTML = this.back;
             this.back = backElement;
             this.domElement.appendChild(this.back);
@@ -45,6 +53,24 @@ class Card extends Widget {
 
         this.isFlipped = false; // When 'true', the 'back' is shown.
         this.flippingTimeout = null;
+    }
+
+    setCardTypeIcon(iconType) {
+        let cardIconType = document.createElement("i");
+        cardIconType.style.position = "absolute";
+        cardIconType.style.color = "#FFF";
+        cardIconType.style.bottom = "0";
+        cardIconType.style.right = "0";
+        cardIconType.style.width = "32px";
+        cardIconType.style.height = "32px";
+        cardIconType.style.transition = "transform .8s;";
+        cardIconType.style.lineHeight = "32px";
+        cardIconType.style.display = "inline-grid";
+        cardIconType.style.textAlign = "center";
+        cardIconType.style.textShadow = "0px 0px 8px rgba(76, 76, 76, 0.7)";
+
+        cardIconType.className = "fab fa-" + iconType;
+        return cardIconType;
     }
 
     onMouseEnter() {
@@ -71,7 +97,7 @@ class Card extends Widget {
             this.domElement.style.filter = "blur(0px)";
             this.domElement.style.transform = "skewX(-0.055turn)";
             this.show();
-        }, 500);
+        }, 220);
     }
 
     /**
