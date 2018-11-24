@@ -62,6 +62,7 @@ class VideoCard extends Card {
                 if (this.readyState == 4 && this.status == 200) {
                     // Typical action to be performed when the document is ready:
                     this.data = JSON.parse(getVimeoJson.responseText);
+                    console.log(this.data);
                     divEl.style.background = "url(" + this.data[0].thumbnail_large + ") no-repeat";
                     divEl.style.backgroundSize = "cover";
                     innerContent.innerHTML = this.data[0].title;
@@ -111,13 +112,16 @@ class VideoCard extends Card {
         let id = videoId.substring(18);
         let video = document.createElement("iframe");
         video.src = "https://player.vimeo.com/video/" + id;
+        video.style.opacity = "1";
         video.frameborder = "0";
         video.allow = "autoplay";
-        video.width = "748";
-        video.height = "178";
-        video.style.transform = "rotateY(180deg)";
-        video.style.opacity = "1";
+        video.width = "264";
+        video.height = "148";
+        video.style.transform = "rotateY(180deg) scaleY(1.205)";
         video.style.border = "unset";
+        video.style.position = "relative";
+        video.style.top = "14px";
+        video.style.display = "grid";
         return video;
     }
 }
