@@ -13,11 +13,12 @@ class Card extends Widget {
     constructor(cardOptions) {
         super(null);
         this.cardOptions = cardOptions;
-        this.iconType = this.cardOptions.iconType;
+        this.cardWidth = this.cardOptions.cardWidth;
         if (this.cardOptions) {
             this.front = this.cardOptions.front;
             this.back = this.cardOptions.back;
-            this.icon = this.cardOptions.icon;
+
+            this.icon = this.cardOptions.icon;        
         }
 
         if (typeof this.icon === "string") {
@@ -28,8 +29,9 @@ class Card extends Widget {
         this.domElement.className = "gridCardElement";
         this.domElement.style.width = "100%";
         this.domElement.style.height = "100%";
+        this.domElement.style.gridTemplateColumns = "1fr 1fr";
         this.domElement.style.transition = "all .3s ease-in-out";
-        this.domElement.style.backgroundPposition = "center center";
+        this.domElement.style.backgroundPosition = "center center";
         this.domElement.style.backgroundSize = "cover";
 
 
@@ -51,6 +53,12 @@ class Card extends Widget {
             this.domElement.appendChild(this.back);
         }
 
+        if (typeof this.cardWidth === "string") {
+            this.domElement.style.width = this.cardWidth;
+        } else if (this.cardWidth) {
+            this.domElement.style.width = this.domElement.style.offsetWidth;
+        }
+
         this.isFlipped = false; // When 'true', the 'back' is shown.
         this.flippingTimeout = null;
     }
@@ -61,6 +69,7 @@ class Card extends Widget {
         cardIconType.style.color = "#FFF";
         cardIconType.style.bottom = "4px";
         cardIconType.style.right = "4px";
+        cardIconType.style.zIndex = "999";
         cardIconType.style.width = "32px";
         cardIconType.style.height = "32px";
         cardIconType.style.transition = "transform .8s;";
@@ -92,7 +101,6 @@ class Card extends Widget {
         this.flippingTimeout = setTimeout(() => {
             this.isFlipped = false;
             this.flippingTimeout = null;
-
             this.domElement.style.transition = "all .5s";
             this.domElement.style.filter = "blur(0px)";
             this.domElement.style.transform = "skewX(-0.055turn)";
@@ -107,9 +115,14 @@ class Card extends Widget {
         if (this.isFlipped) {
             this.domElement.style.transform = "rotateY(-180deg) skewX(0.02turn)";
             this.front.style.display = "none";
-            this.back.style.display = "grid";
+            this.back.style.display = "inline-grid";
             this.back.style.gridRowGap = "4px";
+            this.back.style.gridTemplateColumns = "1fr 1fr";
             this.back.style.transform = "rotateY(-180deg)";
+            // Took all vimeo-Iframes and manipulate it for optimal inline-view in card
+            Array.from(document.getElementsByTagName("iframe")).forEach(function(element) {
+                element.style.transform = "rotateY(180deg) scaleY(1.2)";              
+            });
         } else {
             this.domElement.style.transform = "rotateY(0) skewX(-0.02turn)";
             this.front.style.display = "grid";

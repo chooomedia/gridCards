@@ -28,7 +28,6 @@ class VideoCard extends Card {
                 this.domElement.appendChild(this.back);
             }
         }
-
     }
 
     setCardTypeIcon(videoHost) {
@@ -62,7 +61,6 @@ class VideoCard extends Card {
                 if (this.readyState == 4 && this.status == 200) {
                     // Typical action to be performed when the document is ready:
                     this.data = JSON.parse(getVimeoJson.responseText);
-                    console.log(this.data);
                     divEl.style.background = "url(" + this.data[0].thumbnail_large + ") no-repeat";
                     divEl.style.backgroundSize = "cover";
                     innerContent.innerHTML = this.data[0].title;
@@ -92,7 +90,7 @@ class VideoCard extends Card {
         imgEl.setAttribute("src", "http://i.ytimg.com/vi/" + videoId + "/mqdefault.jpg");
         imgEl.className = "thumb";
         imgEl.style.width = "100%";
-        imgEl.style.height = "180px";
+        imgEl.style.height = "178px";
         imgEl.style.border = "0";
         return imgEl;
     }
@@ -101,7 +99,7 @@ class VideoCard extends Card {
     createObjectVideoEl(videoId) {
         let video = document.createElement("object");
         video.style.width = "100%";
-        video.style.height = "180px";
+        video.style.height = "100%";
         video.style.transform = "rotateY(180deg)";
         video.style.border = "0";
         video.data = "http://www.youtube.com/embed/" + videoId;
@@ -117,10 +115,11 @@ class VideoCard extends Card {
         video.allow = "autoplay";
         video.width = "264";
         video.height = "148";
-        video.style.transform = "rotateY(180deg) scaleY(1.205)";
+        video.style.transform = "rotateY(180deg) scaleY(1.2)";
         video.style.border = "unset";
         video.style.position = "relative";
-        video.style.top = "14px";
+        video.style.top = "16px";
+        video.style.left = "2px";
         video.style.display = "grid";
         return video;
     }

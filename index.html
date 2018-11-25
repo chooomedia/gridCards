@@ -28,7 +28,7 @@
             overscroll-behavior: contain;
         }
 
-        button {
+        button, input[type=button] {
             font-family: var(--card-font-family);
             font-size: 16px;
             font-weight: 600;
@@ -44,6 +44,11 @@
             transition: all .3s;
         }
 
+        button:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
         button:hover, button:focus {
             text-shadow: 4px -5px var(--card-rgba-prim-color);
             background-color: var(--card-rgba-sec-color) !important;
@@ -53,7 +58,6 @@
 
         div {
             font-size: 26px;
-            line-height: 32.5px;
         }
 
         div p {
@@ -73,6 +77,19 @@
             border-bottom: 1px solid rgba(43,43,43,0.35);
         }
 
+        div aside {
+            max-height: 150px;
+            background: rgba(255,255,255,0.95);
+            font-size: 17px;
+            border-bottom: 1px solid transparent;
+            margin: -2px 10px 0 -1px;
+            padding: 6px;
+            line-height: 17px;
+            min-width: 238px;
+            color: rgba(0,0,0,0.8);
+            letter-spacing: -.75px;
+        }
+
         div p:nth-child(1) {
             border-bottom: unset;
         }
@@ -88,9 +105,30 @@
             to   { transform: scale(1); }
         }
 
+         @media (max-width: 414px) {
+            #Header {
+                width: 94%;
+                margin: 0 3% !important;
+            }
+            button {
+                min-width: 48px;
+                padding-left: 11px;
+            }
+            #Header .innerDialog {
+                grid-template-columns: 1fr;
+                grid-template-areas: +
+                "header"
+                "header"
+                "content"
+                "header"
+                "content"
+                "footer"; 
+            }
+        }
+
         @media (min-width: 500px) {
             #Header > .innerDialog {
-                grid-template-columns: 1fr 3fr;
+                grid-template-columns: 1fr 1fr;
                 grid-template-areas: +
                 "header header"
                 "header header"
@@ -119,14 +157,15 @@
 
 <body>
     <header id="Header" style="margin:0 14%;"></header>
-
     <script src="js/widget.js" type="text/javascript"></script>
+    <script src="js/http.js" type="text/javascript"></script>
     <script src="js/collapsibleContainer.js" type="text/javascript"></script>
     <script src="js/card.js" type="text/javascript"></script>
     <script src="js/videoCard.js" type="text/javascript"></script>
     <script src="js/cardStack.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
     <script>
-         {
+        {
             // Creates first card stack from class-function call
             let cardStack = new CardStack(null, {
                 //itemBackgr: "url('https://picsum.photos/397/210/?random') no-repeat",
@@ -134,7 +173,6 @@
                     226 +
                     "/?random&bla=" + (Math.random()) + "') no-repeat",
                 columnCount: 3,
-
             });
             // Creates a video-card and put it into variable
             let card1 = new VideoCard({
@@ -177,29 +215,82 @@
 
             let userLoginButton = this.createButton("Login", "unlock-alt");
             userLoginButton.style.gridColumn = "3/3";
-            userLoginButton.style.width = "208px";
+            userLoginButton.style.minWidth = "106px";
             userLoginButton.addEventListener('click', (e) => {
                 enterToAccount();
             });
+
+            function enterToAccount() {
+                let card4 = new Card({
+                    front: "You have no Account.<br>" +
+                        "<br>Sorry Fellow,<br> you have not registred yet<br> to show beautiful gridCards.",
+                    back: loginFormBox,
+                    cardWidth: "202%",
+                    itemBackgr: "#0099CC"
+                });
+                cardStack.addCard(card4);
+            }
+
+            function createFormHeader() {
+                let formHeader = document.createElement("p");
+                formHeader.style.width = "auto";
+                formHeader.style.lineHeight = "20px";
+                formHeader.innerHTML = "Register now for free";
+                return formHeader;
+            }
 
             // Creates the user input elements
             let loginFormBox = document.createElement("form");
             loginFormBox.id = "gridLogin";
             loginFormBox.style.display = "inline-grid";
-            loginFormBox.style.gridRowGap = "5px";
+            loginFormBox.style.gridTempalteColumns = "1fr 1fr";
+            loginFormBox.style.gridRowGap = "4px";
+            loginFormBox.style.padding = "8px";
+            /* loginFormBox.addEventListener('onsubmit', async (e) => {
+                let response = await new Http().getDataFromCouch("http://127.0.0.1:5984/gridcards/e78465bf32c8797128adda21be000b19");
+                console.log(response);
+                return false;
+            }); */
 
-            function createInputElement(inputType, tType, placehold) {
-                this.inputEl = document.createElement(inputType);
-                this.inputEl.type = tType;
+            // Creates the left inline Column for show Informations for beeing registering Users
+            let inputInformation = document.createElement("div");
+            inputInformation.innerHTML =
+                "<aside>Create a free account now and " +
+                "connect Gridcards to your social media " +
+                "sites like Facebook, Twitter, Youtube, " +
+                "Instagram or Vimeo and publish them on " +
+                "your own Gridcard website. Show your collection " +
+                "to your friends and enjoy shared moments." +
+                "</aside>";
+
+            loginFormBox.appendChild(inputInformation);
+
+            // Creates different Input Element Types
+            function createInputElement(type, inputType, pattern, placehold, autoType) {
+                this.inputEl = document.createElement(type);
+                if (inputType) {
+                    this.inputEl.type = inputType;
+                }
+                if (pattern) {
+                    this.inputEl.pattern = pattern;
+                }
+                if (autoType) {
+                    this.inputEl.setAttribute("autocomplete", autoType);
+                }
                 this.inputEl.className = "gridLoginInput";
                 this.inputEl.style = "grid";
-                this.inputEl.style.lineHeight = "28.5px";
+                this.inputEl.style.lineHeight = "36.5px";
                 this.inputEl.style.border = "unset";
                 this.inputEl.style.fontFamily = "'Montserrat', sans-serif";
                 this.inputEl.style.padding = "0 8px";
+                this.inputEl.style.margin = "3px 0";
+                this.inputEl.style.width = "93%";
+                this.inputEl.style.background = "transparent";
+                this.inputEl.style.borderBottom = "2px solid #FFF";
+                this.inputEl.style.textShadow = "0px 0px 0px #000";
 
                 this.inputEl.placeholder = placehold;
-                this.inputEl.setAttribute("required", "", "autocomplete", "");
+                this.inputEl.setAttribute("required", "");
                 return this.inputEl;
             }
 
@@ -212,68 +303,60 @@
                 return iconBeforeInput
             }
 
-            // Creates the Input Elements for Userlogin
-            let inputUser = createInputElement("input", "text", "EMail *");
-            let inputPaw = createInputElement("input", "password", "Username *");
-            let inputMail = createInputElement("input", "text", "Password *");
-            let registerButton = createInputElement("button", "submit", null);
-            registerButton.style.background = "#FFF";
-            registerButton.style.color = "#FFF";
-            registerButton.innerHTML = "Register";
-            registerButton.style.width = "99%";
-            registerButton.style.transform = "skew(-0.005turn)";
-            registerButton.style.fontFamily = "'Montserrat', sans-serif";
-            registerButton.style.border = "1px solid #FFF";
+            // Creates the input elements for userlogin
+            let inputMail = createInputElement("input", "email", "(.*)@(.*?)\.(.*)", "E-Mail *", "email");
+            let inputPaw = createInputElement("input", "password", "(.+)", "Password *", "current-password");
+    
+            //let decrypted = CryptoJS.AES.decrypt(encrypted, myPassword);
+            //decrypted.toString(CryptoJS.enc.Utf8);
+            
+            //let inputAvatar = createInputElement("input", "file", "(.+)", "upload Avatar *", "image");
+            //inputAvatar.accept = "image/*";
+            //inputAvatar.style.padding = "unset";
 
-            loginFormBox.appendChild(inputMail);
-            loginFormBox.appendChild(inputPaw);
-            loginFormBox.appendChild(inputUser);
-            loginFormBox.appendChild(registerButton);
+            // START Creates the submit button for login or register
+            let registerButton = createInputElement("button", undefined, undefined);
+            registerButton.disabled = true;
+            registerButton.innerHTML = "register now";
 
-            function submit() {
-                console.log('test');
-            }
-
-            /*loginFormBox.get("/", function(req, res) {
-                res.redirect("/login");
-            });
-
-            loginFormBox.get("/login", function(req, res) {
-                res.render("index");
-            });
-
-            loginFormBox.post("/", function(req, res) {
-                let userName = req.body.username;
-                let userName = req.body.password;
-                authenticate(req, username, password);
-                if (req.session && req.session.authenticated){
-                    res.render("welcome", { users: data2.user });
-                } else {
-                    res.redirect("/");
+            inputPaw.addEventListener('change', (e) => {
+                if (inputMail.value.length !== 0 && inputPaw.value.length !== 0) {
+                    registerButton.disabled = false;
                 }
             });
 
-            loginFormBox.listen(3000, function() {
-                console.log("Started express app!");
-            })*/
+            /*let decrypted = CryptoJS.AES.decrypt(encrypted, "password");
+            decrypted.toString(CryptoJS.enc.Utf8);*/
 
-            function enterToAccount() {
-                let card4 = new Card({
-                    front: "",
-                    back: "",
-                    itemBackgr: "#FFF"
-                });
-                cardStack.addCard(card4);
+            registerButton.addEventListener('click', async (e) => {
+                let encrypted = CryptoJS.AES.encrypt(inputPaw.value, "password");
+                let response = await new Http().post(
+                    "http://127.0.0.1:5984/gridcards/", {
+                        "email": inputMail.value,
+                        "paw": encrypted.toString(),
+                    });
+            });
 
-                let card5 = new Card({
-                    front: "<h4>You have no Account.<h4>",
-                    back: "User Registration" + "<br>" + loginFormBox.outerHTML,
-                    itemBackgr: "#0099CC"
-                });
-                card5.show();
-                cardStack.addCard(card5);
-            }
+            registerButton.style.background = "#FFF";
+            registerButton.style.color = "#FFF";
+            registerButton.style.width = "98%";
+            registerButton.style.margin = "7px 0 0 0";
+            registerButton.innerHTML = "complete Registration";
+            registerButton.style.transform = "skew(-0.005turn)";
+            registerButton.style.fontFamily = "'Montserrat', sans-serif";
+            registerButton.style.border = "1px solid #FFF";
+            // END
 
+            let loginFormBoxInputs = document.createElement("div");
+            loginFormBoxInputs.appendChild(this.createFormHeader());
+            loginFormBoxInputs.appendChild(inputMail);
+            loginFormBoxInputs.appendChild(inputPaw);
+            //loginFormBoxInputs.appendChild(inputAvatar);
+            loginFormBoxInputs.appendChild(registerButton);
+
+            loginFormBox.appendChild(loginFormBoxInputs);
+
+            // Creates the header
             let collapsibleContainer = new CollapsibleContainer("Header", {
                 title: "<i style='color:#0099CC;transform:skewX(-0.03turn);' class='fas fa-th'></i> gridCards",
                 content: cardStack.domElement

@@ -13,6 +13,10 @@ function createButton(text, faIcon) {
     addCardsButton.innerHTML = buttonIcon.outerHTML + text;
     addCardsButton.style.color = "#FFF";
     addCardsButton.style.margin = "5px 0px";
+
+    if (document.body.offsetWidth <= 414) {
+        addCardsButton.innerHTML = buttonIcon.outerHTML + "";
+    }
     return addCardsButton;
 }
 
@@ -32,7 +36,7 @@ class CollapsibleContainer extends Widget {
         headerContainer.style.lineHeight = "64px";
         headerContainer.style.gridGap = "4px 6px";
         headerContainer.style.gridColumn = "3/3";
-        headerContainer.style.gridTemplateColumns = "5fr 1fr";
+        headerContainer.style.gridTemplateColumns = "4fr 1fr";
 
         this.domElement.appendChild(headerContainer);
 
