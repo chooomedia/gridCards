@@ -2,51 +2,132 @@ class VideoCard extends Card {
 
     constructor(cardOptions) {
         super(cardOptions);
-        
-        if (!cardOptions || !cardOptions.videoUrl)  {
+
+        if (!cardOptions || !cardOptions.videoUrl) {
             throw "cardOptions not supplied for VideoCard!";
         }
+        this.video = cardOptions.videoUrl;
+        this.videoHost = cardOptions.videoHost;
 
-        this.videoId = this.getVideoId(cardOptions.videoUrl);
+        if (typeof this.videoHost === "string") {
+            let cardIconType = this.setCardTypeIcon(this.videoHost);
+            this.domElement.appendChild(cardIconType);
+        }
 
-        this.front = this.createVideoImgEl();
-        this.domElement.appendChild(this.front);
-
-        this.back = this.createVideoIframeEl();
-        this.domElement.appendChild(this.back);
+        if (typeof this.video === "string") {
+            if (this.video.includes("youtube")) {
+                let videoId = this.getVideoId(this.video);
+                this.front = this.createYTVideoImgEl(videoId);
+                this.domElement.appendChild(this.front);
+                this.back = this.createObjectVideoEl(videoId);
+                this.domElement.appendChild(this.back);
+            } else if (this.video.includes("vimeo")) {
+                this.front = this.createVimeoVideoImgEl(this.video);
+                this.domElement.appendChild(this.front);
+                this.back = this.createIframeVideoEl(this.video);
+                this.domElement.appendChild(this.back);
+            }
+        }
     }
 
-    getVideoId(url){
+    setCardTypeIcon(videoHost) {
+        let cardIconType = document.createElement("i");
+        cardIconType.style.position = "absolute";
+        cardIconType.style.color = "#FFF";
+        cardIconType.style.bottom = "4px";
+        cardIconType.style.right = "4px";
+        cardIconType.style.width = "32px";
+        cardIconType.style.height = "32px";
+        cardIconType.style.transition = "transform .8s;";
+        cardIconType.style.lineHeight = "32px";
+        cardIconType.style.display = "inline-grid";
+        cardIconType.style.textAlign = "center";
+        cardIconType.style.textShadow = "0px 0px 8px rgba(76, 76, 76, 0.7)";
+
+        cardIconType.className = "fab fa-" + videoHost;
+        return cardIconType;
+    }
+
+    createVimeoVideoImgEl(videoId) {
+        let divEl = document.createElement("div");
+        divEl.style.height = "164px";
+        divEl.style.width = "100%";
+        let innerContent = document.createElement("p");
+        let id = videoId.substring(18);
+        let vimeoUrl = "https://www.vimeo.com/api/v2/video/" + id + ".json";
+
+        let getVimeoJson = new XMLHttpRequest();
+        getVimeoJson.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Typical action to be performed when the document is ready:
+                    this.data = JSON.parse(getVimeoJson.responseText);
+                    divEl.style.background = "url(" + this.data[0].thumbnail_large + ") no-repeat";
+                    divEl.style.backgroundSize = "cover";
+                    innerContent.innerHTML = this.data[0].title;
+                }
+            },
+            getVimeoJson.open("GET", vimeoUrl, true);
+        getVimeoJson.send();
+        divEl.appendChild(innerContent);
+        return divEl;
+    }
+
+    getVideoId(url) {
         let ID = "";
-        url = url.replace(/(>|<)/gi,"").split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-            if(url[2] !== undefined) {
-                ID = url[2].split(/[^0-9a-z_\-]/i);
-                ID = ID[0];
-            }
-            else {
-                ID = url;
-            }
+        url = url.replace(/(>|<)/gi, "").split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+        if (url[2] !== undefined) {
+            ID = url[2].split(/[^0-9a-z_\-]/i);
+            ID = ID[0];
+        } else {
+            ID = url;
+        }
         return ID;
     }
 
-    createVideoImgEl() {
+    // Creates a Image via Api-Service from insertet youtube-video-link
+    createYTVideoImgEl(videoId) {
         let imgEl = document.createElement("img");
-            imgEl.setAttribute("src", "http://i.ytimg.com/vi/" + this.videoId + "/mqdefault.jpg");
-            imgEl.className = "thumb";
-            imgEl.style.width = "100%";
-            imgEl.style.height = "180px";
-            imgEl.style.border = "0";
+        imgEl.setAttribute("src", "http://i.ytimg.com/vi/" + videoId + "/mqdefault.jpg");
+        imgEl.className = "thumb";
+        imgEl.style.width = "100%";
+        imgEl.style.height = "164px";
+        imgEl.style.border = "0";
         return imgEl;
     }
 
-    createVideoIframeEl() {
-        let iFrame = document.createElement("iframe");
-            iFrame.style.width = "100%";
-            iFrame.style.height = "180px";
-            iFrame.style.transform = "rotateY(180deg)";
-            iFrame.style.border = "0";
-            iFrame.setAttribute("src", "https://www.youtube.com/embed/" +
-            this.videoId + "?autoplay=1&autohide=1&border=0&wmode=opaque&enablejsapi=1");
-        return iFrame;
+    // Creates a object element
+    createObjectVideoEl(videoId) {
+        let video = document.createElement("object");
+        video.style.width = "100%";
+        video.style.height = "164px";
+        video.style.transform = "rotateY(180deg) scaleY(1.2)";
+        video.style.border = "0";
+        video.data = "http://www.youtube.com/embed/" + videoId;
+        video.onclick = () => {
+            console.log("this");
+        };
+        return video;
+    }
+
+    createIframeVideoEl(videoId) {
+        let id = videoId.substring(18);
+        let video = document.createElement("iframe");
+        video.src = "https://player.vimeo.com/video/" + id;
+        video.style.opacity = "1";
+        video.frameborder = "0";
+        video.allow = "autoplay";
+        video.width = "*";
+        video.left = "7px";
+        video.height = "164";
+        video.style.transform = "rotateY(180deg) scaleY(1.2)";
+        video.style.width = "100%";
+        video.style.border = "unset";
+        video.style.position = "relative";
+        video.style.left = "2px";
+        video.style.display = "grid";
+        video.onclick = () => {
+            console.log("this");
+        };
+        return video;
     }
 }

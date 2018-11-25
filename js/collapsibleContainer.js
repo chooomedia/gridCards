@@ -1,8 +1,22 @@
-function createButton(text) {
+/**
+ * Creates a button and adds to other Elements with appendChild()
+ * @param {string} text adds Button innerText
+ * @param {string} faIcon adds every time fa- before class-ICONNAME (Example: fa-square: =- square)
+ */
+function createButton(text, faIcon) {
     let addCardsButton = document.createElement("button");
-    addCardsButton.innerHTML = text;
+    let buttonIcon = document.createElement("i");
+    buttonIcon.style.marginRight = "8px";
+    buttonIcon.style.transition = "transform .8s;";
+    buttonIcon.style.transform = "skew(-0.08turn)";
+    buttonIcon.className = "fas fa-" + faIcon;
+    addCardsButton.innerHTML = buttonIcon.outerHTML + text;
     addCardsButton.style.color = "#FFF";
     addCardsButton.style.margin = "5px 0px";
+
+    if (document.body.offsetWidth <= 414) {
+        addCardsButton.innerHTML = buttonIcon.outerHTML + "";
+    }
     return addCardsButton;
 }
 
@@ -21,7 +35,8 @@ class CollapsibleContainer extends Widget {
         headerContainer.style.gridArea = "header";
         headerContainer.style.lineHeight = "64px";
         headerContainer.style.gridGap = "4px 6px";
-        headerContainer.style.gridTemplateColumns = "2fr 1fr";
+        headerContainer.style.gridColumn = "3/3";
+        headerContainer.style.gridTemplateColumns = "4fr 1fr";
 
         this.domElement.appendChild(headerContainer);
 
@@ -36,11 +51,11 @@ class CollapsibleContainer extends Widget {
             if (window.scrollY > 506) {
                 let gridCardArray = document.getElementsByClassName("gridCardElement");
                 let cardLength = gridCardArray.length;
-                let randomIndex = Math.floor((Math.random() * cardLength -15) + 1);
-                    gridCardArray[randomIndex].style.backgroundAttachment = "fixed";
-                    gridCardArray[randomIndex].style.backgroundSize = "cover";
-                    gridCardArray[randomIndex].style.transition = "all .3s";
-                    gridCardArray[randomIndex].style.filter = "blur(3px)";
+                let randomIndex = Math.floor((Math.random() * cardLength - 15) + 1);
+                gridCardArray[randomIndex].style.backgroundAttachment = "fixed";
+                gridCardArray[randomIndex].style.backgroundSize = "cover";
+                gridCardArray[randomIndex].style.transition = "all .3s";
+                gridCardArray[randomIndex].style.filter = "blur(3px)";
             }
         };
 
@@ -68,7 +83,8 @@ class CollapsibleContainer extends Widget {
         let orgHeightVal = this.content.style.height;
         this.collapsed = false;
 
-        let collapseButton = createButton("Toggle container");
+        let collapseButton = createButton("Toggle", "arrows-alt-v");
+        collapseButton.style.margin = "5px 0px 5px 1px";
         collapseButton.addEventListener('click', () => {
             this.collapsed = !this.collapsed;
 

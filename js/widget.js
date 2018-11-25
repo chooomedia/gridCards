@@ -7,8 +7,9 @@ class Widget {
         }
         let parentContainer = document.getElementById(parentContainerId);
         if (!parentContainer) {
-             return;      
+            return;
         }
         parentContainer.appendChild(this.domElement);
     }
+
 }
