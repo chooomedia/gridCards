@@ -78,16 +78,18 @@
         }
 
         div aside {
-            max-height: 150px;
+            animation: slideToRight .5s 1 alternate;
             background: rgba(255,255,255,0.95);
+            border: 1px solid #0099CC;
             font-size: 17px;
-            border-bottom: 1px solid transparent;
-            margin: -2px 10px 0 -1px;
-            padding: 6px;
-            line-height: 17px;
-            min-width: 238px;
+            transform: translateX(-1px);
+            padding: 4px;
+            line-height: 17.8px;
+            transition: all .5s;
+            min-height: 140px;
             color: rgba(0,0,0,0.8);
             letter-spacing: -.75px;
+            min-width: 265px;
         }
 
         div p:nth-child(1) {
@@ -105,30 +107,41 @@
             to   { transform: scale(1); }
         }
 
-         @media (max-width: 414px) {
-            #Header {
-                width: 94%;
-                margin: 0 3% !important;
-            }
-            button {
-                min-width: 48px;
-                padding-left: 11px;
-            }
+        @keyframes slideToRight {
+            from { transform: translateX(100%); min-width: 0px; opacity:0; z-index: -1; }
+            to   { transform: translateX(0); min-width: 265px; opacity:1; z-index: 999; }
+        }
+
+        @media (min-width: 1401px) {
             #Header .innerDialog {
-                grid-template-columns: 1fr;
-                grid-template-areas: +
-                "header"
-                "header"
-                "content"
-                "header"
-                "content"
-                "footer"; 
+                grid-template-columns: repeat(4, 1fr) !important;
             }
         }
 
-        @media (min-width: 500px) {
-            #Header > .innerDialog {
-                grid-template-columns: 1fr 1fr;
+        @media (max-width: 1400px) {
+            #Header {
+                margin: 0 10% !important;
+            }
+            #Header .innerDialog {
+                grid-template-columns: 1fr 1fr 1fr !important;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            #Header {
+                margin: 0 1em !important;
+            }
+            #Header .innerDialog {
+                grid-template-columns: 1fr 1fr 1fr !important;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            #Header {
+                margin: 0 2% !important;
+            }
+            #Header .innerDialog {
+                grid-template-columns: 1fr 1fr !important;
                 grid-template-areas: +
                 "header header"
                 "header header"
@@ -139,19 +152,36 @@
             }
         }
 
-        @media (min-width: 700px) {
-            #Header > .innerDialog {
-                grid-template-columns: 1fr 4fr 1fr;
-                grid-template-areas: 
-                "header header header"
-                "header header header"
-                "content content content"
-                "header header header"
-                "content content content"
-                "footer footer footer"; 
+        @media screen and (max-width: 414px) {
+            #Header {
+                width: 94%;
+                margin: 0 3% !important;
+            }
+            button {
+                min-width: 48px;
+                padding-left: 11px;
+            }
+            #Header .innerDialog {
+                grid-template-columns: 1fr !important;
+                grid-template-areas: +
+                "header"
+                "header"
+                "content"
+                "header"
+                "content"
+                "footer"; 
             }
         }
-    }
+
+        @media screen and (max-width: 320px) {
+            #Header {
+                width: 100% !important;
+                left: 0px !important;            }
+            iframe {
+                transform: rotateY(180deg) scaleX(1.051) !important;
+                left: 0px !important;
+            } 
+        }
     </style>
 </head>
 
@@ -172,13 +202,14 @@
                 itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth + "/" +
                     226 +
                     "/?random&bla=" + (Math.random()) + "') no-repeat",
-                columnCount: 3,
+                itemHeight: "164px",
+                columnCount: 4
             });
             // Creates a video-card and put it into variable
             let card1 = new VideoCard({
                 itemBackgr: "rgba(0, 153, 204, 0.1)",
                 videoUrl: "https://www.youtube.com/watch?v=ir3EV5wAitI&t=7s",
-                videoHost: "youtube"
+                videoHost: "youtube-square"
             });
             // Adds created card into cardStack
             cardStack.addCard(card1);
@@ -187,7 +218,7 @@
             let card2 = new VideoCard({
                 itemBackgr: "rgba(0, 153, 204, 0.1)",
                 videoUrl: "https://vimeo.com/213888883",
-                videoHost: "vimeo-v"
+                videoHost: "vimeo"
             });
             // Adds created card into cardStack
             cardStack.addCard(card2);
@@ -195,7 +226,7 @@
             let card3 = new VideoCard({
                 itemBackgr: "rgba(0, 153, 204, 0.1)",
                 videoUrl: "https://vimeo.com/75124475",
-                videoHost: "vimeo-v"
+                videoHost: "vimeo"
             });
             // Adds created card into cardStack
             cardStack.addCard(card3);
@@ -214,19 +245,18 @@
             }*/
 
             let userLoginButton = this.createButton("Login", "unlock-alt");
-            userLoginButton.style.gridColumn = "3/3";
-            userLoginButton.style.minWidth = "106px";
+            userLoginButton.style.gridRow = "1";
+            userLoginButton.style.width = "106px";
+            userLoginButton.style.gridColumn = "inherit";
             userLoginButton.addEventListener('click', (e) => {
                 enterToAccount();
             });
 
             function enterToAccount() {
                 let card4 = new Card({
-                    front: "You have no Account.<br>" +
-                        "<br>Sorry Fellow,<br> you have not registred yet<br> to show beautiful gridCards.",
-                    back: loginFormBox,
-                    cardWidth: "202%",
-                    itemBackgr: "#0099CC"
+                    front: loginFormBox,
+                    itemBackgr: (card4) => "url('https://steamusercontent-a.akamaihd.net/ugc/947332735409813448/9B4B1B0387A432E60CD8C39A3A3E635F11C58AFF/') no-repeat 100% 0",
+                    cardHeight: "152px"
                 });
                 cardStack.addCard(card4);
             }
@@ -245,6 +275,7 @@
             loginFormBox.style.display = "inline-grid";
             loginFormBox.style.gridTempalteColumns = "1fr 1fr";
             loginFormBox.style.gridRowGap = "4px";
+            loginFormBox.style.gridArea = "login";
             loginFormBox.style.padding = "8px";
             /* loginFormBox.addEventListener('onsubmit', async (e) => {
                 let response = await new Http().getDataFromCouch("http://127.0.0.1:5984/gridcards/e78465bf32c8797128adda21be000b19");
@@ -255,11 +286,11 @@
             // Creates the left inline Column for show Informations for beeing registering Users
             let inputInformation = document.createElement("div");
             inputInformation.innerHTML =
-                "<aside>Create a free account now and " +
+                "<aside><b>Create a free account now</b> and " +
                 "connect Gridcards to your social media " +
-                "sites like Facebook, Twitter, Youtube, " +
-                "Instagram or Vimeo and publish them on " +
-                "your own Gridcard website. Show your collection " +
+                "sites like <b>Facebook, Twitter, Youtube, " +
+                "Instagram</b> or <b>Vimeo</b> and <b>publish</b> them on " +
+                "</b>your own <b>Homepage</b> website. Show your collection " +
                 "to your friends and enjoy shared moments." +
                 "</aside>";
 
@@ -279,14 +310,15 @@
                 }
                 this.inputEl.className = "gridLoginInput";
                 this.inputEl.style = "grid";
-                this.inputEl.style.lineHeight = "36.5px";
+                this.inputEl.style.lineHeight = "35px";
                 this.inputEl.style.border = "unset";
                 this.inputEl.style.fontFamily = "'Montserrat', sans-serif";
                 this.inputEl.style.padding = "0 8px";
-                this.inputEl.style.margin = "3px 0";
-                this.inputEl.style.width = "93%";
+                this.inputEl.style.gridGap = "0 3px";
+                this.inputEl.style.marginLeft = "4px";
+                this.inputEl.style.width = "90%";
                 this.inputEl.style.background = "transparent";
-                this.inputEl.style.borderBottom = "2px solid #FFF";
+                this.inputEl.style.borderBottom = "1px solid #0099CC";
                 this.inputEl.style.textShadow = "0px 0px 0px #000";
 
                 this.inputEl.placeholder = placehold;
@@ -306,10 +338,6 @@
             // Creates the input elements for userlogin
             let inputMail = createInputElement("input", "email", "(.*)@(.*?)\.(.*)", "E-Mail *", "email");
             let inputPaw = createInputElement("input", "password", "(.+)", "Password *", "current-password");
-    
-            //let decrypted = CryptoJS.AES.decrypt(encrypted, myPassword);
-            //decrypted.toString(CryptoJS.enc.Utf8);
-            
             //let inputAvatar = createInputElement("input", "file", "(.+)", "upload Avatar *", "image");
             //inputAvatar.accept = "image/*";
             //inputAvatar.style.padding = "unset";
@@ -332,8 +360,9 @@
                 let encrypted = CryptoJS.AES.encrypt(inputPaw.value, "password");
                 let response = await new Http().post(
                     "http://127.0.0.1:5984/gridcards/", {
-                        "email": inputMail.value,
-                        "paw": encrypted.toString(),
+                        "email": inputMail.value,   // TODO: Set Email also as Username!
+                        "paw": encrypted.toString(), // Set 512h crypted paw to db
+                        "avatar": "https://diekommune.de.cool/avatar.png", // Set default Avatar
                     });
             });
 
@@ -364,6 +393,9 @@
 
             // Selects the nav top header
             let topHeader = document.getElementsByTagName("section")[0];
+            if (topHeader) {
+                document.getElementsByTagName("button")[0].style.display = "none";
+            }
             topHeader.appendChild(userLoginButton);
         }
 
@@ -372,8 +404,8 @@
                 //itemBackgr: "url('https://picsum.photos/397/210/?random') no-repeat",
                 itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth + "/" + 226 +
                     "/?random&bla=" + (Math.random()) + "no-repeat')",
-                columnCount: 3,
-                itemHeight: "200px"
+                columnCount: 4,
+                itemHeight: "226px",
             });
 
             // Mockuploop to show empty elements after second header on frontend
@@ -384,7 +416,7 @@
                     icon: "puzzle-piece",
                     itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth +
                         "/" +
-                        226 + "/?random&bla=" + (Math.random()) + "no-repeat')"
+                        200 + "/?random&bla=" + (Math.random()) + "no-repeat')"
                 });
                 cardStack2.addCard(c);
             }
@@ -398,7 +430,7 @@
                         icon: "plus-square",
                         itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth +
                             "/" +
-                            226 + "/?random&bla=" + (Math.random()) + "no-repeat')",
+                            200 + "/?random&bla=" + (Math.random()) + "no-repeat')",
                     });
                     cardStack2.addCard(c);
                 }
@@ -412,7 +444,7 @@
                     icon: "plus",
                     itemBackgr: (card) => "url('https://picsum.photos/" + card.domElement.offsetWidth +
                         "/" +
-                        226 + "/?random&bla=" + (Math.random()) + "no-repeat')",
+                        200 + "/?random&bla=" + (Math.random()) + "no-repeat')",
                 });
                 cardStack2.addCard(c);
             }
@@ -473,10 +505,6 @@
             addButtonsDiv.style.gridGap = "0 7px";
 
             //TODO: Side-bar-class, Login-Class, Footer-Class+
-            let loginButton = this.createButton("Login", "unlock-alt");
-            loginButton.addEventListener('click', (e) => {
-                takekey();
-            });
 
             // Appends the button to the buttonWrapperDiv
             addButtonsDiv.appendChild(addCardButton);

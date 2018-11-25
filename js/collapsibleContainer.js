@@ -83,7 +83,7 @@ class CollapsibleContainer extends Widget {
         let orgHeightVal = this.content.style.height;
         this.collapsed = false;
 
-        let collapseButton = createButton("Toggle container", "arrows-alt-v");
+        let collapseButton = createButton("Toggle", "arrows-alt-v");
         collapseButton.style.margin = "5px 0px 5px 1px";
         collapseButton.addEventListener('click', () => {
             this.collapsed = !this.collapsed;

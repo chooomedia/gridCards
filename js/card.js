@@ -28,12 +28,11 @@ class Card extends Widget {
 
         this.domElement.className = "gridCardElement";
         this.domElement.style.width = "100%";
-        this.domElement.style.height = "100%";
+        this.domElement.style.minHeight = "164px";
         this.domElement.style.gridTemplateColumns = "1fr 1fr";
         this.domElement.style.transition = "all .3s ease-in-out";
         this.domElement.style.backgroundPosition = "center center";
         this.domElement.style.backgroundSize = "cover";
-
 
         if (typeof this.front === "string") {
             let frontElement = document.createElement("p");
@@ -51,12 +50,14 @@ class Card extends Widget {
             this.domElement.appendChild(this.back);
         } else if (this.back) {
             this.domElement.appendChild(this.back);
+        } else if (typeof this.back === "undefined") {
+            this.back = this.front;
         }
 
-        if (typeof this.cardWidth === "string") {
-            this.domElement.style.width = this.cardWidth;
-        } else if (this.cardWidth) {
-            this.domElement.style.width = this.domElement.style.offsetWidth;
+        if (typeof this.cardHeight === "string") {
+            this.domElement.style.height = this.cardHeight;
+        } else if (this.cardHeight) {
+            this.domElement.style.height = this.domElement.style.offsetHeight;
         }
 
         this.isFlipped = false; // When 'true', the 'back' is shown.
@@ -95,7 +96,7 @@ class Card extends Widget {
     }
 
     onMouseLeave() {
-        if (!this.isFlipped || this.flippingTimeout) {
+        if (!this.isFlipped || this.flippingTimeout || this.playing) {
             return;
         }
         this.flippingTimeout = setTimeout(() => {
@@ -105,7 +106,7 @@ class Card extends Widget {
             this.domElement.style.filter = "blur(0px)";
             this.domElement.style.transform = "skewX(-0.055turn)";
             this.show();
-        }, 220);
+        }, 600);
     }
 
     /**
@@ -121,7 +122,7 @@ class Card extends Widget {
             this.back.style.transform = "rotateY(-180deg)";
             // Took all vimeo-Iframes and manipulate it for optimal inline-view in card
             Array.from(document.getElementsByTagName("iframe")).forEach(function(element) {
-                element.style.transform = "rotateY(180deg) scaleY(1.2)";              
+                element.style.transform = "rotateY(180deg) scaleX(1.16)";            
             });
         } else {
             this.domElement.style.transform = "rotateY(0) skewX(-0.02turn)";
@@ -132,6 +133,7 @@ class Card extends Widget {
         if (this.cardOptions && this.cardOptions.itemBackgr) {
             if (typeof this.cardOptions.itemBackgr === "function") {
                 this.domElement.style.background = this.cardOptions.itemBackgr(this);
+                this.domElement.style.backgroundSize = "cover";
             } else if (typeof this.cardOptions.itemBackgr === "string") {
                 this.domElement.style.background = this.cardOptions.itemBackgr;
             }

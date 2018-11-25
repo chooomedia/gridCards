@@ -6,23 +6,21 @@ class CardStack extends Widget {
         this.domElement.style.height = "auto";
         this.domElement.style.display = "grid";
         this.domElement.style.gridTemplateAreas =
-                                            "header" +
-                                            "content" +
-                                            "sidebar" +
-                                            "footer";
+                                            "header header login" +
+                                            "content content content" +
+                                            "sidebar content content" +
+                                            "footer footer footer";
         this.domElement.style.gridArea = "content";
-        this.domElement.style.gridTemplateRows = "repeat(9, 1fr)"; 
+        this.domElement.style.gridTemplateRows = "repeat(1, 3fr)"; 
         this.domElement.style.gridGap = "6px";
         this.domElement.style.transformOrigin = "top";
-        this.domElement.style.gridTemplateColumns = "repeat(auto-fill, minmax(240px, 1fr))";
-        this.domElement.style.gridTemplateRows = "3fr";
-        
+        this.domElement.style.gridTemplateColumns = "repeat(auto-fit, minmax(240px, 1fr))";     
         this.domElement.style.fontSize = "18px";
 
         this.options = options;
 
         if (this.options && this.options.columnCount) {
-            this.columnCount = this.options.columnCount;
+            this.domElement.style.gridTemplateColumns = "repeat(" + this.options.columnCount +", 1fr)";
         } else {
             this.columnCount = 3;
         }
