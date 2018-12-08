@@ -245,13 +245,13 @@
                 cardStack.addCard(c);
             }*/
 
-            let userLoginButton = this.createButton("Login", "unlock-alt");
+            /*loginbutton let userLoginButton = this.createButton("Login", "unlock-alt");
             userLoginButton.style.gridRow = "1";
             userLoginButton.style.width = "106px";
             userLoginButton.style.gridColumn = "inherit";
             userLoginButton.addEventListener('click', (e) => {
                 enterToAccount();
-            });
+            });*/
 
             function enterToAccount() {
                 let card4 = new Card({
@@ -410,38 +410,30 @@
                 itemHeight: "226px",
             });
 
-            // Creates a amazon affilate-product-card and put it into variable
-            let card1 = new AdCard({
-                host: "amazon",
-                partner: "chooomedia-21",
-                adId: "B07CZ48J57"
-            });
+            function getProducts() {
+                let getAmznProds = new XMLHttpRequest();
+                getAmznProds.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            // Typical action to be performed when the document is ready:
+                            this.amaznProducts = JSON.parse(getAmznProds.responseText);
+
+                            for (let i = 0; i < this.amaznProducts.length; i++) {
+                                let newCard = new AdCard({
+                                    host: this.amaznProducts[i].host,
+                                    partner: this.amaznProducts[i].partner,
+                                    adId: this.amaznProducts[i].adId,
+                                });
+                                cardStack2.addCard(newCard);
+                            }
+                        }
+                    },
+                    getAmznProds.open("GET", "http://127.0.0.1:5500/amznFavs.json", true);
+                getAmznProds.send();
+            };
+            getProducts();
+
             // Adds created card into cardStack
-            cardStack2.addCard(card1);
-
-            let card2 = new AdCard({
-                host: "amazon",
-                partner: "chooomedia-21",
-                adId: "B01FLYKIAQ"
-            });
-            cardStack2.addCard(card2);
-
-            let card3 = new AdCard({
-                host: "amazon",
-                partner: "chooomedia-21",
-                adId: "B01F5YKCV2"
-            });
-            cardStack2.addCard(card3);
-
-            let card4 = new AdCard({
-                host: "amazon",
-                partner: "chooomedia-21",
-                adId: "B01KUX9VT2"
-            });
-            cardStack2.addCard(card4);
-
-            // Mockuploop to show empty elements after second header on frontend
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 6; i++) {
                 let c = new Card({
                     front: "Lorem ipsum dolor sit amet",
                     back: "And the second Element",

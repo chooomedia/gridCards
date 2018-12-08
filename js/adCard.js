@@ -48,17 +48,17 @@ class AdCard extends Card {
     // Creates an affiliate linked element
     createAmznImgEl(adId) {
         let product = document.createElement("img");
-        product.style.minWidth = "100%";
-        product.style.height = "200px";
+        product.style.width = "262px";
+        product.style.height = "188px";
         product.style.background = "#FFF";
-        product.style.padding = "13px 0";
+        product.style.padding = "18px 36px";
         product.style.border = "1px solid #0099CC";
         product.style.position = "relative";
         product.style.top = "0";
         product.style.left = "0";
         product.style.transform = "rotateY(180deg) scale(1)";
         product.src = "//ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=DE&ASIN=" + adId + 
-                      "&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL640_&tag=" + this.partnerId;
+                      "&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_HQ1080_&tag=" + this.partnerId;
 
         product.link = "https://www.amazon.de/gp/product/" + adId +
                        "/ref=as_li_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=" + adId + 
