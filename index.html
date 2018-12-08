@@ -224,11 +224,10 @@
             // Adds created card into cardStack
             cardStack.addCard(card2);
 
-            // Creates a amazon affilate-product-card and put it into variable
-            let card3 = new AdCard({
-                host: "amazon",
-                partner: "chooomedia-21",
-                adId: "B07CZ48J57"
+            let card3 = new VideoCard({
+                itemBackgr: "rgba(0, 153, 204, 0.1)",
+                videoUrl: "https://vimeo.com/75124475",
+                videoHost: "vimeo"
             });
             // Adds created card into cardStack
             cardStack.addCard(card3);
@@ -257,7 +256,8 @@
             function enterToAccount() {
                 let card4 = new Card({
                     front: loginFormBox,
-                    itemBackgr: (card4) => "url('https://steamusercontent-a.akamaihd.net/ugc/947332735409813448/9B4B1B0387A432E60CD8C39A3A3E635F11C58AFF/') no-repeat 100% 0",
+                    itemBackgr: (card4) =>
+                        "url('https://steamusercontent-a.akamaihd.net/ugc/947332735409813448/9B4B1B0387A432E60CD8C39A3A3E635F11C58AFF/') no-repeat 100% 0",
                     cardHeight: "152px"
                 });
                 cardStack.addCard(card4);
@@ -362,7 +362,7 @@
                 let encrypted = CryptoJS.AES.encrypt(inputPaw.value, "password");
                 let response = await new Http().post(
                     "http://127.0.0.1:5984/gridcards/", {
-                        "email": inputMail.value,   // TODO: Set Email also as Username!
+                        "email": inputMail.value, // TODO: Set Email also as Username!
                         "paw": encrypted.toString(), // Set 512h crypted paw to db
                         "avatar": "https://diekommune.de.cool/avatar.png", // Set default Avatar
                     });
@@ -409,6 +409,36 @@
                 columnCount: 4,
                 itemHeight: "226px",
             });
+
+            // Creates a amazon affilate-product-card and put it into variable
+            let card1 = new AdCard({
+                host: "amazon",
+                partner: "chooomedia-21",
+                adId: "B07CZ48J57"
+            });
+            // Adds created card into cardStack
+            cardStack2.addCard(card1);
+
+            let card2 = new AdCard({
+                host: "amazon",
+                partner: "chooomedia-21",
+                adId: "B01FLYKIAQ"
+            });
+            cardStack2.addCard(card2);
+
+            let card3 = new AdCard({
+                host: "amazon",
+                partner: "chooomedia-21",
+                adId: "B01F5YKCV2"
+            });
+            cardStack2.addCard(card3);
+
+            let card4 = new AdCard({
+                host: "amazon",
+                partner: "chooomedia-21",
+                adId: "B01KUX9VT2"
+            });
+            cardStack2.addCard(card4);
 
             // Mockuploop to show empty elements after second header on frontend
             for (let i = 0; i < 30; i++) {
