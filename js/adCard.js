@@ -54,7 +54,7 @@ class AdCard extends Card {
         product.style.backgroundRepeat = "no-repeat, repeat";
         product.style.backgroundSize = "50%, cover";
         product.style.backgroundPosition = "center center, center center";
-        product.style.padding = "18px 36px";
+        product.style.padding = "18px 44px";
         product.style.border = "1px solid #0099CC";
         product.style.position = "relative";
         product.style.top = "0";
