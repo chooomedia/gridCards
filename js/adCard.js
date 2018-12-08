@@ -50,7 +50,10 @@ class AdCard extends Card {
         let product = document.createElement("img");
         product.style.width = "262px";
         product.style.height = "188px";
-        product.style.background = "#FFF";
+        product.style.backgroundImage = "url(https://lh3.googleusercontent.com/-f4IWP7Dhevw/WOPe7EdszAI/AAAAAAAAILw/BApLtTGdBjIIzxAV5HwGmKB3G1wgmPuyQCJoC/s500-p/92b598b679c5ab1699bd685deb4a93b7.gif), linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 100%)";
+        product.style.backgroundRepeat = "no-repeat, repeat";
+        product.style.backgroundSize = "50%, cover";
+        product.style.backgroundPosition = "center center, center center";
         product.style.padding = "18px 36px";
         product.style.border = "1px solid #0099CC";
         product.style.position = "relative";
