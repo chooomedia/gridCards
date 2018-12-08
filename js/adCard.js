@@ -56,7 +56,7 @@ class AdCard extends Card {
         product.style.position = "relative";
         product.style.top = "0";
         product.style.left = "0";
-        product.style.transform = "rotateY(180deg) scale(1)";
+        product.style.transform = "rotateY(0) scale(1)";
         product.src = "//ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=DE&ASIN=" + adId + 
                       "&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_HQ1080_&tag=" + this.partnerId;
 
@@ -74,7 +74,7 @@ class AdCard extends Card {
         let iframe = document.createElement("iframe");
         iframe.style.height = "241px";
         iframe.style.width = "100%";
-        iframe.style.transform = "rotateY(180deg) scaleX(.94) !important";
+        iframe.style.transform = "rotateY(-180deg) scaleX(.94) !important";
         iframe.style.border = "0px";
         iframe.style.right = "36%";
         iframe.style.top = "-7px";
