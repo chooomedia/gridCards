@@ -7,7 +7,7 @@ class AdCard extends Card {
         this.partnerId = cardOptions.partner; // mucurm-21
         this.adId = cardOptions.adId; // f.E. B079QHMFWC
 
-        if (typeof this.adHost === "string") { 
+        if (typeof this.adHost === "string") {
             let cardIconType = this.setCardTypeIcon(this.adHost);
             this.domElement.appendChild(cardIconType);
         }
@@ -16,7 +16,8 @@ class AdCard extends Card {
             if (this.adHost.includes("amazon")) {
                 this.front = this.createAmznImgEl(this.adId);
                 this.domElement.appendChild(this.front);
-                this.back = this.createAmznIframe(this.adId);
+                this.back = this.createShareBox(this.adId);
+                // this.back.appendChild(this.createAmznIframe(this.adId));
                 this.domElement.appendChild(this.back);
 
             } else if (this.adHost.includes("google")) {
@@ -62,12 +63,12 @@ class AdCard extends Card {
         product.style.top = "0";
         product.style.left = "0";
         product.style.transform = "rotateY(0) scale(1)";
-        product.src = "//ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=DE&ASIN=" + adId + 
-                      "&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_HQ1080_&tag=" + this.partnerId;
+        product.src = "//ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=DE&ASIN=" + adId +
+            "&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_HQ1080_&tag=" + this.partnerId;
 
         product.link = "https://www.amazon.de/gp/product/" + adId +
-                       "/ref=as_li_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=" + adId + 
-                       "&linkCode=as2&tag=" + this.partnerId;
+            "/ref=as_li_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=" + adId +
+            "&linkCode=as2&tag=" + this.partnerId;
         product.onclick = () => {
             window.open(product.link, '_blank');
         };
@@ -75,17 +76,59 @@ class AdCard extends Card {
     }
 
     // Creates a object element
+    createShareBox(adId) {
+        let shareEl = document.createElement("div");
+        shareEl.style.height = "226px";
+        shareEl.style.lineHeight = "265px";
+        shareEl.style.width = "96%";
+        shareEl.style.padding = "0 7px";
+        shareEl.style.textAlign = "center";
+        shareEl.innerHTML =
+            "<a style='color:#f5f5f5;display:inline;top:1em;' href='http://chooo.de#" + adId + "'>" +
+            "<i class='fab fa-3x fa-amazon'></i></a>" +
+            "<a style='color:#f5f5f5;display:inline;top:1em;' href='http://chooo.de#" + adId + "'>" +
+            "<i class='fas fa-3x fa-share-alt'></i></a>";
+        shareEl.style.transform = "rotateY(0deg) scaleX(.94) !important";
+        shareEl.style.border = "0px";
+        shareEl.style.background = "rgba(0, 153, 204, .85)";
+        shareEl.style.float = "right";
+        shareEl.style.top = "0";
+        shareEl.style.left = "0";
+        shareEl.style.position = "relative";
+        shareEl.style.display = "inline-grid";
+        let shortProduct = "http://www.chooo.de#" + adId;
+        let product = "https://www.amazon.de/gp/product/" + adId +
+            "/ref=as_li_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=" + adId +
+            "&linkCode=as2&tag=" + this.partnerId;
+
+        shareEl.getElementsByTagName("a")[0].onclick = () => {
+            window.open(product, '_blank');
+        };
+        shareEl.getElementsByTagName("a")[1].onclick = () => {
+            const el = document.createElement('textarea');
+            el.value = shortProduct;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            window.alert("Link for sharing copied to clipboard");
+        };
+        return shareEl;
+    }
+
+    // Creates a object element
     createAmznIframe(adId) {
         let iframe = document.createElement("iframe");
-        iframe.style.height = "241px";
+        let shareBox = this.createShareBox(adId);
+        iframe.style.height = "240px";
         iframe.style.width = "100%";
-        iframe.style.transform = "rotateY(-180deg) scaleX(.94) !important";
+        iframe.style.transform = "rotateY(180deg) scaleX(.94) !important";
         iframe.style.border = "0px";
-        iframe.style.right = "36%";
+        iframe.style.right = "-70%";
         iframe.style.top = "-7px";
-        iframe.style.position = "relative";
-        iframe.style.display =  "inline-grid";
-        iframe.src = "//ws-eu.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=DE&source=ac&ref=tf_til&ad_type=product_link&tracking_id="+ this.partnerId + "&marketplace=amazon&region=DE&placement="+ adId +"&asins="+ adId +"&show_border=false&link_opens_in_new_window=true&price_color=333333&title_color=0066c0&bg_color=ffffff";
+        iframe.style.position = "absolute";
+        iframe.style.display = "inline-grid";
+        iframe.src = "//ws-eu.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=DE&source=ac&ref=tf_til&ad_type=product_link&tracking_id=" + this.partnerId + "&marketplace=amazon&region=DE&placement=" + adId + "&asins=" + adId + "&show_border=false&link_opens_in_new_window=true&price_color=333333&title_color=0066c0&bg_color=ffffff";
         iframe.onclick = () => {
             window.open(product.link, '_blank');
         };
