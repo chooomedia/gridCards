@@ -20,7 +20,7 @@ function createButton(text, faIcon) {
     return addCardsButton;
 }
 
-class CollapsibleContainer extends Widget {
+class Menu extends Widget {
     constructor(parentContainerId, options) {
         super(parentContainerId);
         this.options = options;

@@ -236,7 +236,7 @@
     <header id="Header" style="margin:0 12.25%;"></header>
     <script src="js/widget.js" type="text/javascript"></script>
     <script src="js/http.js" type="text/javascript"></script>
-    <script src="js/collapsibleContainer.js" type="text/javascript"></script>
+    <script src="js/menu.js" type="text/javascript"></script>
     <script src="js/card.js" type="text/javascript"></script>
     <script src="js/videoCard.js" type="text/javascript"></script>
     <script src="js/adCard.js" type="text/javascript"></script>
@@ -437,7 +437,7 @@
             loginFormBox.appendChild(loginFormBoxInputs);
 
             // Creates the header
-            let collapsibleContainer = new CollapsibleContainer("Header", {
+            let menu = new Menu("Header", {
                 title: "<i style='color:#0099CC;transform:skewX(-0.03turn);' class='fas fa-th'></i> gridCards",
                 content: cardStack.domElement
             });
@@ -577,7 +577,7 @@
             addButtonsDiv.appendChild(donateButton);
             addButtonsDiv.style.gridTemplateColumns = "repeat(" + addButtonsDiv.children.length + ", 1fr)";
 
-            let collapsibleContainer2 = new CollapsibleContainer("Header", {
+            let menu2 = new Menu("Header", {
                 // Put the filled addButtonsDiv(htmlcollection) into a object, u can put objects or strings into the classes
                 title: addButtonsDiv,
                 content: cardStack2.domElement
