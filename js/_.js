@@ -35,7 +35,7 @@ class AdCard extends Card {
         cardIconType.style.right = "4px";
         cardIconType.style.width = "32px";
         cardIconType.style.height = "32px";
-        cardIconType.style.transition = "transform .8s;";
+        cardIconType.style.transition = "transform .4s;";
         cardIconType.style.lineHeight = "32px";
         cardIconType.style.display = "inline-grid";
         cardIconType.style.textAlign = "center";

@@ -1,222 +1,323 @@
 [
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B07CZ48J57"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B01FLYKIAQ"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
+        "adId":"B0106K7NPS"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B074ZCWG7J"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
         "adId":"B07G1VZ1GY"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
+        "adId":"B073Y4BJH3"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B01H15RVIK"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B01KHNW3MM"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B01LZSUQKL"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B00O9VRKIQ"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B07HGW2DZF"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B078WST5RK"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B07G6RJN2W"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B01N4PEWFW"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B07BM2FCFY"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B00TE8XKIS"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B01MS4CH4D"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B017PNI8CQ"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B000RZHU9C"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B07MSL8P7S"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
         "adId":"B0785G9K6N"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B01F5YKCV2"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B01KUX9VT2"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B07JVQ1ST4"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B01LXQ2ERP"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
+        "adId":"B00REU57XY"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
         "adId":"B00L0MZ8H2"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B07H7JJTCX"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B01L7JUE9Y"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B071CV4FXL"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B009URS9HK"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B00NXYNWQE"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
+        "adId":"B00HF2NNBY"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
         "adId":"B00PW4I9M0"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B072C8PSJ2"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B07KS64MHB"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B00NVDP3ZU"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B01LXEB6RE"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B0754QNQWY"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B075BBSLR2"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B007GC4ENO"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B071GVGFQF"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B078GSSVQF"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B014VZDC5O"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B00SAYCXWG"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B079RJGSMV"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B00N2OQCIA"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B07D7M65F9"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B0069CQ7BE"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B07JZMJZHJ"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B002GJN96U"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B06WLQFVVV"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B012SUWI68"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B01IFJEWTM"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B01HUZ6MOK"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B00OVAXR50"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B0766399V1"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B075X36DCR"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B01DU9G5BK"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B01EWN3CLY"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B077PRJCQB"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"3836241587"
     },
     {
         "host":"amazon",
-        "partner":"chooomedia-21",
+        "partner":"mucurm-21",
         "adId":"B01K4CYV58"
+    },
+    {
+        "host":"amazon",
+        "partner":"mucurm-21",
+        "adId":"B07G625LYL"
     }
 ]
+

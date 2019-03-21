@@ -5,17 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>gridCards Widget</title>
+    <title>gridCards Gadget Gallery</title>
     <!-- adds own icon and font-family-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script>
+        function scrollTo(hash) {
+            location.hash = "#" + hash;
+        }
+
+        function pageHasHash() {
+            if (!window.location.hash) {
+                return;
+            } else {
+                let urlHash = window.location.hash;
+                scrollTo(urlHash);
+                return true;
+            }
+        }
+    </script>
     <style>
         :root {
             /* global variables */
             /* set own icon font-family Group */
             --card-font-family: 'Montserrat', sans-serif;
-            --card-rgba-prim-color: rgba(53,53,53,0.7);
+            --card-rgba-prim-color: rgba(53, 53, 53, 0.7);
             --card-rgba-sec-color: rgba(53, 53, 53, 00.7);
             --card-buttons-color: #3aa1cf;
         }
@@ -43,7 +58,8 @@
             scroll-behavior: smooth;
         }
 
-        button, input[type=button] {
+        button,
+        input[type=button] {
             font-family: var(--card-font-family);
             font-size: 16px;
             font-weight: 600;
@@ -55,7 +71,7 @@
             position: relative;
             color: #FFF;
             border: unset;
-            margin:3px 0;
+            margin: 3px 0;
             transition: all .3s;
         }
 
@@ -64,11 +80,12 @@
             cursor: not-allowed;
         }
 
-        button:hover, button:focus {
+        button:hover,
+        button:focus {
             text-shadow: 4px -5px var(--card-rgba-prim-color);
             background-color: var(--card-rgba-sec-color) !important;
-            color: #FFF !important; 
-            cursor:pointer; 
+            color: #FFF !important;
+            cursor: pointer;
         }
 
         div {
@@ -89,12 +106,12 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            border-bottom: 1px solid rgba(43,43,43,0.35);
+            border-bottom: 1px solid rgba(43, 43, 43, 0.35);
         }
 
         div aside {
             animation: slideToRight .5s 1 alternate;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             border: 1px solid #0099CC;
             font-size: 17px;
             transform: translateX(-1px);
@@ -102,7 +119,7 @@
             line-height: 17.8px;
             transition: all .5s;
             min-height: 140px;
-            color: rgba(0,0,0,0.8);
+            color: rgba(0, 0, 0, 0.8);
             letter-spacing: -.75px;
             min-width: 265px;
         }
@@ -118,19 +135,36 @@
         }
 
         @keyframes animatefromMiddle {
-            from { transform: scale(0); }
-            to   { transform: scale(1); }
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
         }
 
         @keyframes slideToRight {
-            from { transform: translateX(100%); min-width: 0px; opacity:0; z-index: -1; }
-            to   { transform: translateX(0); min-width: 265px; opacity:1; z-index: 999; }
+            from {
+                transform: translateX(100%);
+                min-width: 0px;
+                opacity: 0;
+                z-index: -1;
+            }
+
+            to {
+                transform: translateX(0);
+                min-width: 265px;
+                opacity: 1;
+                z-index: 999;
+            }
         }
 
         @media (max-width: 1400px) {
             #Header {
                 margin: 0 10% !important;
             }
+
             #Header .innerDialog {
                 grid-template-columns: 1fr 1fr 1fr !important;
             }
@@ -140,6 +174,7 @@
             #Header {
                 margin: 0 1em !important;
             }
+
             #Header .innerDialog {
                 grid-template-columns: 1fr 1fr 1fr !important;
             }
@@ -149,15 +184,15 @@
             #Header {
                 margin: 0 2% !important;
             }
+
             #Header .innerDialog {
                 grid-template-columns: 1fr 1fr !important;
-                grid-template-areas: +
-                "header header"
-                "header header"
-                "content content"
-                "header header"
-                "content content"
-                "footer footer"; 
+                grid-template-areas: + "header header"
+                    "header header"
+                    "content content"
+                    "header header"
+                    "content content"
+                    "footer footer";
             }
         }
 
@@ -166,35 +201,38 @@
                 width: 94%;
                 margin: 0 3% !important;
             }
+
             button {
                 min-width: 48px;
                 padding-left: 11px;
             }
+
             #Header .innerDialog {
                 grid-template-columns: 1fr !important;
-                grid-template-areas: +
-                "header"
-                "header"
-                "content"
-                "header"
-                "content"
-                "footer"; 
+                grid-template-areas: + "header"
+                    "header"
+                    "content"
+                    "header"
+                    "content"
+                    "footer";
             }
         }
 
         @media screen and (max-width: 320px) {
             #Header {
                 width: 100% !important;
-                left: 0px !important;            }
+                left: 0px !important;
+            }
+
             iframe {
                 transform: rotateY(180deg) scaleX(1.051) !important;
                 left: 0px !important;
-            } 
+            }
         }
     </style>
 </head>
 
-<body>
+<body onload="pageHasHash()">
     <header id="Header" style="margin:0 12.25%;"></header>
     <script src="js/widget.js" type="text/javascript"></script>
     <script src="js/http.js" type="text/javascript"></script>
@@ -434,13 +472,14 @@
                                     host: this.amaznProducts[i].host,
                                     partner: this.amaznProducts[i].partner,
                                     adId: this.amaznProducts[i].adId,
+                                    isShared: pageHasHash(),
                                 });
                                 cardStack2.addCard(card);
                             }
                             // Get notated child-elements-node from parent-element-node 
                         }
                     },
-                    getAmznProds.open("GET", "http://127.0.0.1:5500/amznFavs.json", true);
+                    getAmznProds.open("GET", "./amznFavs.json", true);
                 getAmznProds.send();
             };
 

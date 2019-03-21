@@ -4,8 +4,8 @@ class AdCard extends Card {
         super(cardOptions);
 
         this.adHost = cardOptions.host; // amazon
-        this.partnerId = cardOptions.partner; // chooomedia-21
-        this.adId = cardOptions.adId; // f.E. B079QHMFWC   
+        this.partnerId = cardOptions.partner; // mucurm-21
+        this.adId = cardOptions.adId; // f.E. B079QHMFWC
 
         if (typeof this.adHost === "string") { 
             let cardIconType = this.setCardTypeIcon(this.adHost);
@@ -36,7 +36,7 @@ class AdCard extends Card {
         cardIconType.style.right = "4px";
         cardIconType.style.width = "32px";
         cardIconType.style.height = "32px";
-        cardIconType.style.transition = "transform .8s;";
+        cardIconType.style.transition = "transform .4s;";
         cardIconType.style.lineHeight = "32px";
         cardIconType.style.display = "inline-grid";
         cardIconType.style.textAlign = "center";
@@ -48,9 +48,11 @@ class AdCard extends Card {
     // Creates an affiliate linked element
     createAmznImgEl(adId) {
         let product = document.createElement("img");
+        product.id = adId;
         product.style.width = "262px";
         product.style.height = "188px";
-        product.style.backgroundImage = "url(https://lh3.googleusercontent.com/-f4IWP7Dhevw/WOPe7EdszAI/AAAAAAAAILw/BApLtTGdBjIIzxAV5HwGmKB3G1wgmPuyQCJoC/s500-p/92b598b679c5ab1699bd685deb4a93b7.gif), linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 100%)";
+        product.style.backgroundImage = "url(./assets/images/gridAdCardLoader.gif), linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 100%)";
+        product.style.filter = "contrast(1.1)";
         product.style.backgroundRepeat = "no-repeat, repeat";
         product.style.backgroundSize = "50%, cover";
         product.style.backgroundPosition = "center center, center center";

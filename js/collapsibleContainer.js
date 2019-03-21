@@ -7,7 +7,7 @@ function createButton(text, faIcon) {
     let addCardsButton = document.createElement("button");
     let buttonIcon = document.createElement("i");
     buttonIcon.style.marginRight = "8px";
-    buttonIcon.style.transition = "transform .8s;";
+    buttonIcon.style.transition = "transform .4s;";
     buttonIcon.style.transform = "skew(-0.08turn)";
     buttonIcon.className = "fas fa-" + faIcon;
     addCardsButton.innerHTML = buttonIcon.outerHTML + text;
@@ -55,7 +55,7 @@ class CollapsibleContainer extends Widget {
                 gridCardArray[randomIndex].style.backgroundAttachment = "fixed";
                 gridCardArray[randomIndex].style.backgroundSize = "cover";
                 gridCardArray[randomIndex].style.transition = "all .3s";
-                gridCardArray[randomIndex].style.filter = "blur(3px)";
+                gridCardArray[randomIndex].style.filter = "blur(1px)";
             }
         };
 
