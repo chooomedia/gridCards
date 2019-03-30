@@ -78,15 +78,16 @@ class AdCard extends Card {
     // Creates a object element
     createShareBox(adId) {
         let shareEl = document.createElement("div");
-        shareEl.style.height = "226px";
+        shareEl.style.display = "inline-grid";
+        shareEl.style.height = "0px";
         shareEl.style.lineHeight = "265px";
         shareEl.style.width = "96%";
         shareEl.style.padding = "0 7px";
         shareEl.style.textAlign = "center";
         shareEl.innerHTML =
-            "<a style='color:#f5f5f5;display:inline;top:1em;' href='http://chooo.de#" + adId + "'>" +
+            "<a class='amaznLink' style='color:#f5f5f5;display:inline;top:1em;' href='http://chooo.de#" + adId + "'>" +
             "<i class='fab fa-3x fa-amazon'></i></a>" +
-            "<a style='color:#f5f5f5;display:inline;top:1em;' href='http://chooo.de#" + adId + "'>" +
+            "<a class='shareLink' style='color:#f5f5f5;display:inline;top:1em;' href='http://chooo.de#" + adId + "'>" +
             "<i class='fas fa-3x fa-share-alt'></i></a>";
         shareEl.style.transform = "rotateY(0deg) scaleX(.94) !important";
         shareEl.style.border = "0px";
@@ -95,24 +96,34 @@ class AdCard extends Card {
         shareEl.style.top = "0";
         shareEl.style.left = "0";
         shareEl.style.position = "relative";
-        shareEl.style.display = "inline-grid";
-        let shortProduct = "http://www.chooo.de#" + adId;
+        let shortProduct = "http://chooo.de#" + adId;
         let product = "https://www.amazon.de/gp/product/" + adId +
             "/ref=as_li_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=" + adId +
             "&linkCode=as2&tag=" + this.partnerId;
 
-        shareEl.getElementsByTagName("a")[0].onclick = () => {
+        shareEl.getElementsByClassName("amaznLink")[0].onclick = () => {
             window.open(product, '_blank');
         };
-        shareEl.getElementsByTagName("a")[1].onclick = () => {
+        shareEl.getElementsByClassName("shareLink")[0].onclick = () => {
             const el = document.createElement('textarea');
             el.value = shortProduct;
             document.body.appendChild(el);
             el.select();
             document.execCommand('copy');
+            window.alert("Link copied to clipboard");
             document.body.removeChild(el);
-            window.alert("Link for sharing copied to clipboard");
+            navigator.share({
+                    url: shortProduct,
+                    title: 'gridCards share',
+                    text: 'Do you want to donate me this cool stuff?',
+                })
+                .then(() => console.log('Successful share'))
+                .catch((error) => console.log('Error sharing', error));
         };
+
+        setTimeout(function () {
+            shareEl.style.height = "226px";
+        }, 800);
         return shareEl;
     }
 
