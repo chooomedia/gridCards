@@ -10,15 +10,18 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
         integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="js/jquery.js" type="text/javascript"></script>
     <script>
         function pageHasHash() {
+
             if (!window.location.hash) {
                 return;
             } else {
                 let urlHash = window.location.hash;
-                let hashEl = document.createElement("div");
-                    hashEl.id = "hashEl";
-                hashEl.scrollTop;
+                let elem = $('#_' + window.location.hash.replace('#', ''));
+                if (elem) {
+                    $.scrollTo(elem.left, elem.top);
+                }
                 return true;
             }
         }

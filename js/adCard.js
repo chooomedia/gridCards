@@ -96,7 +96,7 @@ class AdCard extends Card {
         shareEl.style.top = "0";
         shareEl.style.left = "0";
         shareEl.style.position = "relative";
-        let shortProduct = "http://chooo.de#" + adId;
+        let shortProduct = "chooo.de/#" + adId;
         let product = "https://www.amazon.de/gp/product/" + adId +
             "/ref=as_li_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=" + adId +
             "&linkCode=as2&tag=" + this.partnerId;
