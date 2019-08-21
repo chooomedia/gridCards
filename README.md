@@ -7,6 +7,7 @@ fancy skwed grid with class based ES6 Javascript
 <li>< v0.7 - create own affilate linked products for amazon inside the json object file (./amaznFavs.json)</li>
 </ul>
 <img src="https://github.com/chooomedia/gridCards/blob/v0.6/showcase-gridCards.gif?raw=true" alt="showcase-gif" />
+
 No Bootstrap, Material Design or anything equal other
 CC - Fully re-usable - <a href="http://paypal.me/choooomedia/" target="_blank">donate me - i am a digital nomad</a>
 
