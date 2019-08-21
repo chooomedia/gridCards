@@ -6,6 +6,7 @@ class AdCard extends Card {
         this.adHost = cardOptions.host; // amazon
         this.partnerId = cardOptions.partner; // mucurm-21
         this.adId = cardOptions.adId; // f.E. B079QHMFWC
+        this.isShared = cardOptions.isShared; // true or false
 
         if (typeof this.adHost === "string") {
             let cardIconType = this.setCardTypeIcon(this.adHost);
@@ -47,11 +48,16 @@ class AdCard extends Card {
     }
 
     // Creates an affiliate linked element
-    createAmznImgEl(adId) {
+    createAmznImgEl(adId, isShared) {
         let product = document.createElement("img");
         product.id = adId;
-        product.style.width = "262px";
-        product.style.height = "188px";
+        if (!isShared) {
+            product.style.width = "262px";
+            product.style.height = "188px";
+        } else {
+            product.style.width = "500px";
+            product.style.height = "262px";
+        }
         product.style.backgroundImage = "url(./assets/images/gridAdCardLoader.gif), linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 100%)";
         product.style.filter = "contrast(1.1)";
         product.style.backgroundRepeat = "no-repeat, repeat";
@@ -124,6 +130,7 @@ class AdCard extends Card {
         setTimeout(function () {
             shareEl.style.height = "226px";
         }, 800);
+
         return shareEl;
     }
 

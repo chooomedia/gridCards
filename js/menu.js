@@ -55,7 +55,6 @@ class Menu extends Widget {
                 gridCardArray[randomIndex].style.backgroundAttachment = "fixed";
                 gridCardArray[randomIndex].style.backgroundSize = "cover";
                 gridCardArray[randomIndex].style.transition = "all .3s";
-                gridCardArray[randomIndex].style.filter = "blur(1px)";
             }
         };
 
