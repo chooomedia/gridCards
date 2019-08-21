@@ -10,5 +10,4 @@ fancy skwed grid with class based ES6 Javascript
 No Bootstrap, Material Design or anything equal other
 CC - Fully re-usable - <a href="http://paypal.me/choooomedia/" target="_blank">donate me - i am a digital nomad</a>
 
-Design & UI by chooomedia
-Powered by DBI Analytics GmbH
+Design & UI by Chris M. chooomedia
