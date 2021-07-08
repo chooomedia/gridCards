@@ -38,7 +38,7 @@ class VideoCard extends Card {
         cardIconType.style.right = "4px";
         cardIconType.style.width = "32px";
         cardIconType.style.height = "32px";
-        cardIconType.style.transition = "transform .8s;";
+        cardIconType.style.transition = "transform .4s;";
         cardIconType.style.lineHeight = "32px";
         cardIconType.style.display = "inline-grid";
         cardIconType.style.textAlign = "center";
@@ -104,7 +104,7 @@ class VideoCard extends Card {
         video.style.border = "0";
         video.data = "http://www.youtube.com/embed/" + videoId;
         video.onclick = () => {
-            console.log("this");
+            console.log("YT Video played");
         };
         return video;
     }
@@ -119,7 +119,7 @@ class VideoCard extends Card {
         video.width = "*";
         video.left = "7px";
         video.height = "164";
-        video.style.transform = "rotateY(180deg) scaleY(1.2)";
+        video.style.transform = "rotateX(180deg) scaleY(1.2)";
         video.style.width = "100%";
         video.style.border = "unset";
         video.style.position = "relative";

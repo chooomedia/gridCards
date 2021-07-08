@@ -73,7 +73,7 @@ class Card extends Widget {
         cardIconType.style.zIndex = "999";
         cardIconType.style.width = "32px";
         cardIconType.style.height = "32px";
-        cardIconType.style.transition = "transform .8s;";
+        cardIconType.style.transition = "transform .4s;";
         cardIconType.style.lineHeight = "32px";
         cardIconType.style.display = "inline-grid";
         cardIconType.style.textAlign = "center";
@@ -102,11 +102,11 @@ class Card extends Widget {
         this.flippingTimeout = setTimeout(() => {
             this.isFlipped = false;
             this.flippingTimeout = null;
-            this.domElement.style.transition = "all .5s";
+            this.domElement.style.transition = "all 1s";
             this.domElement.style.filter = "blur(0px)";
             this.domElement.style.transform = "skewX(-0.055turn)";
             this.show();
-        }, 600);
+        }, 300);
     }
 
     /**
@@ -114,7 +114,7 @@ class Card extends Widget {
      */
     show() {
         if (this.isFlipped) {
-            this.domElement.style.transform = "rotateY(-180deg) skewX(0.02turn)";
+            this.domElement.style.transform = "rotateY(180deg) skewX(0.02turn)";
             this.front.style.display = "none";
             this.back.style.display = "inline-grid";
             this.back.style.gridRowGap = "4px";
